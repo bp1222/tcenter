@@ -8,26 +8,63 @@ AuthLDAPRemoteUserIsDN on
 Options +Indexes
 
 #require valid-user
+require user uid=jrfrcc,ou=People,dc=rit,dc=edu
 require user uid=ammrcc,ou=People,dc=rit,dc=edu 
+require user uid=bmkrcc,ou=People,dc=rit,dc=edu
 require user uid=epdrcc,ou=People,dc=rit,dc=edu
 require user uid=bmsrcc,ou=People,dc=rit,dc=edu
+require user uid=bsrrcc,ou=People,dc=rit,dc=edu
+require user uid=bwgrcc,ou=People,dc=rit,dc=edu
+require user uid=cmrrcc,ou=People,dc=rit,dc=edu
+require user uid=dmbdss,ou=People,dc=rit,dc=edu 
+require user uid=dmshelp,ou=People,dc=rit,dc=edu
 require user uid=trdhelp,ou=People,dc=rit,dc=edu
+require user uid=esprcc,ou=People,dc=rit,dc=edu
 require user uid=kafrcc,ou=People,dc=rit,dc=edu
+require user uid=mabrcc,ou=People,dc=rit,dc=edu
+require user uid=mjghelp,ou=People,dc=rit,dc=edu
+require user uid=fxlhelp,ou=People,dc=rit,dc=edu
 require user uid=srjrcc,ou=People,dc=rit,dc=edu
 require user uid=mrtrcc,ou=People,dc=rit,dc=edu
+require user uid=rhsrcc,ou=People,dc=rit,dc=edu
+require user uid=rltrcc,ou=People,dc=rit,dc=edu
+require user uid=txtrcc2,ou=People,dc=rit,dc=edu
 require user uid=tjtrcc,ou=People,dc=rit,dc=edu
+require user uid=awwrcc,ou=People,dc=rit,dc=edu
+require user uid=msmrcc,ou=People,dc=rit,dc=edu
+require user uid=mwbhelp,ou=People,dc=rit,dc=edu
+require user uid=krwrcc,ou=People,dc=rit,dc=edu
+require user uid=hxbrcc,ou=People,dc=rit,dc=edu
 require user uid=stlrcc,ou=People,dc=rit,dc=edu
+require user uid=exfrcc,ou=People,dc=rit,dc=edu
 require user uid=dmsrcc,ou=People,dc=rit,dc=edu
+require user uid=spprcc,ou=People,dc=rit,dc=edu
 require user uid=rllrcc,ou=People,dc=rit,dc=edu
 require user uid=jplrcc,ou=People,dc=rit,dc=edu
 require user uid=jdwrcc,ou=People,dc=rit,dc=edu
 require user uid=mcbrcc,ou=People,dc=rit,dc=edu
+require user uid=epkrcc,ou=People,dc=rit,dc=edu
+require user uid=rjchelp,ou=People,dc=rit,dc=edu
+require user uid=ralrcc,ou=People,dc=rit,dc=edu
 require user uid=kalrcc,ou=People,dc=rit,dc=edu
+require user uid=amlrcc,ou=People,dc=rit,dc=edu
 require user uid=jpprcc,ou=People,dc=rit,dc=edu
+require user uid=rzbhelp,ou=People,dc=rit,dc=edu
 require user uid=jpwrcc,ou=People,dc=rit,dc=edu
+require user uid=gdircc,ou=People,dc=rit,dc=edu
 require user uid=ajfrcc,ou=People,dc=rit,dc=edu
 
 # desktop support staff
 require user uid=vxiacc,ou=People,dc=rit,dc=edu
 require user uid=smtacc,ou=People,dc=rit,dc=edu
 require user uid=dlpits,ou=People,dc=rit,dc=edu
+
+# Others
+require user uid=mbshelp,ou=People,dc=rit,dc=edu
+require user uid=sawacc,ou=People,dc=rit,dc=edu
+require user uid=jpsdss,ou=People,dc=rit,dc=edu
+require user uid=achhelp,ou=People,dc=rit,dc=edu
+require user uid=bpmrcc,ou=People,dc=rit,dc=edu
+require user uid=jpsdss,ou=People,dc=rit,dc=edu
+require user uid=achhelp,ou=People,dc=rit,dc=edu
+require user uid=zxwits,ou=People,dc=rit,dc=edu

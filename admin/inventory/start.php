@@ -1,9 +1,0 @@
-<?
-include("config.inc");
-include("nav.inc");
-include("header.inc");
-mysql_pconnect(_DBSERVER,_USERNAME,_PASSWORD);
-mysql_select_db(_DATABASE);
-include("start.inc");
-include("footer.inc")
-?>

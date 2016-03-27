@@ -1,15 +1,15 @@
 8
 
 dir
-32
-file:///home/dave/projects/tcenter1/trunk/www/inc
-file:///home/dave/projects
+135
+svn://tcenter.rit.edu/tcenter2/releases/tcenter2.0betas/tcenter2b.7-16-07/inc
+svn://tcenter.rit.edu
 
 
 
-2008-09-17T15:56:12.993033Z
-32
-dave
+2008-02-15T19:59:14.457017Z
+131
+jdwrcc
 
 
 svn:special svn:externals svn:needs-lock
@@ -24,79 +24,89 @@ svn:special svn:externals svn:needs-lock
 
 
 
-fa5c2e99-6609-419c-b0b2-6f39b90b64f9
+d8f50d07-8a63-48aa-b51b-489fc3c4bb95
 
-header2.php
+header.inc
 file
 
 
 
 
-2008-09-17T16:53:11.000000Z
-ab172393656254d6834bcbec82bbb735
-2008-09-17T15:56:12.993033Z
-32
-dave
+2008-03-12T20:53:30.000000Z
+8dad9837d76feaa0f030cd3b1f55255d
+2007-07-30T19:01:07.641269Z
+1
+jdwrcc
 
-header3.php
+lookup.inc
 file
 
 
 
 
-2008-09-17T16:53:11.000000Z
-8f3d9ebe6ac7df65af8f36f176c5ed1c
-2008-09-17T15:56:12.993033Z
-32
-dave
+2008-03-12T20:53:30.000000Z
+f22eabdcb4f48ae68b9792dcaf357672
+2007-07-30T19:01:07.641269Z
+1
+jdwrcc
 
-inventory.inc
+import_db.php
 file
 
 
 
 
-2008-09-17T16:53:11.000000Z
-91d851a32357c7d942001db598d8e24c
-2008-09-17T15:56:12.993033Z
-32
-dave
-has-props
+2008-03-12T20:53:30.000000Z
+7afbb26dc85a7754fd215f85114ba683
+2007-07-30T19:01:07.641269Z
+1
+jdwrcc
 
-connection.inc
+dev.inc
 file
 
 
 
 
-2008-09-17T16:53:11.000000Z
-048072de9c6118657fc10fb20e7b5381
-2008-09-17T15:56:12.993033Z
-32
-dave
-has-props
+2008-03-12T20:53:30.000000Z
+f05662ff89df418e230af6ed1672aca3
+2007-07-30T19:01:07.641269Z
+1
+jdwrcc
 
-.htaccess
+footer.inc
 file
 
 
 
 
-2008-09-17T16:53:11.000000Z
-b910eb6bda15db6574c73d383fa2dfa4
-2008-09-17T15:56:12.993033Z
-32
-dave
+2008-03-12T20:53:30.000000Z
+8f97e152f09e9619a9b93079131ff30b
+2007-07-30T19:01:07.641269Z
+1
+jdwrcc
 
-header.php
+style.inc
 file
 
 
 
 
-2008-09-17T16:53:11.000000Z
-362d66588f15c61ad96ef8fad272c8c0
-2008-09-17T15:56:12.993033Z
-32
-dave
+2008-03-12T20:53:30.000000Z
+76caa0adfe7969bf464a752064546ac9
+2007-07-30T19:01:07.641269Z
+1
+jdwrcc
+
+ticket.inc
+file
+
+
+
+
+2008-03-12T20:53:30.000000Z
+bf5a7e1d266a4f16a83563372d12e55a
+2007-07-30T19:01:07.641269Z
+1
+jdwrcc
 

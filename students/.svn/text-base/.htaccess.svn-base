@@ -1,9 +1,0 @@
-AuthName "Resnet TechCenter"
-AuthType Basic
-AuthLDAPEnabled on
-AuthLDAPAuthoritative on
-AuthLDAPURL "ldap://129.21.3.20:ldaps/ou=people,dc=rit,dc=edu"
-AuthLDAPRemoteUserIsDN on
-Options +Indexes
-
-require valid-user
