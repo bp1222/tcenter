@@ -1,1 +1,1 @@
-<?define(ROOT, "../")?>
+<?define('ROOT', "../")?>

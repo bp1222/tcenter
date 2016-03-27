@@ -2,92 +2,78 @@
 /**
   * report.php
   *
-  * Reporting functionality for statistical information
+  * reporting functionality for statistical information
+  *
+  * TCenter 3 - Ticket Management
+  * Copyright (C) 2007-2008		Rochester Institute of Technology
+  *
+  * This program is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 3 of the License, or
+  * (at your option) any later version.
+  *
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   *
   * @author	David Walker	(azrail@csh.rit.edu)
   */
 
+$title = "Reports";
+include "setup.inc";
 include "inc/header.inc";
-
-// Generate report statistics
-$today = date("Y-m-d");
-$last_week =  date("Y-m-d", strtotime("-1 week"));
-$this_month =  date("Y-m-1");
 
 function numTicketsByVar ($var = null, $date = null)
 {
+    $db = Database::getInstance();
 	$sql = "SELECT count(t_id) FROM ticket ".($var ? " WHERE $var >= '$date'" : "");
-	$result = mysql_fetch_assoc(mysql_query($sql));
+	$result = $db->query($sql)->fetch_assoc();
 	return $result['count(t_id)'];
 }
 
 function numTicketsBoundByVar ($var = null, $start_date, $end_date)
 {
+    $db = Database::getInstance();
 	$sql = "SELECT count(t_id) FROM ticket WHERE $var BETWEEN '$start_date' AND '$end_date'";
-	$result = mysql_fetch_assoc(mysql_query($sql));
+	$result = $db->query($sql)->fetch_assoc();
 	return $result['count(t_id)'];
 }
 
 function getReopenedCount ($start_date, $end_date = null)
 {
+    $db = Database::getInstance();
 	if (!is_null($end_date))
 		$sql = "SELECT reopen_count FROM ticket WHERE close_date BETWEEN '$start_date' AND '$end_date'";
 	else
 		$sql = "SELECT reopen_count FROM ticket WHERE close_date >= $start_date";
 
-	$result = mysql_query($sql);
+	$result = $db->query($sql);
 	$reopen = 0;
-	while ($row = mysql_fetch_assoc($result))
+	while ($row = $db->fetch_assoc($result))
 	{
 		$reopen += $row['reopen_count'];
 	}
 	return $reopen;
 }
 
-function getTimeInStateOnDate ($start_date, $end_date = null)
-{
-	if (is_null($end_date))
-		$sql = "SELECT time_working, time_waiting FROM ticket WHERE open_date >= '$start_date'";
-	else
-		$sql = "SELECT time_working, time_waiting FROM ticket WHERE open_date BETWEEN '$start_date' AND '$end_date'";
-
-	var_dump($sql);
-	$result = mysql_query($sql);
-	$total_working = 0;
-	$total_waiting = 0;
-	$num_row = mysql_num_rows($result);
-	
-	if ($num_row > 0)
-	{
-		while ($row = mysql_fetch_assoc($result))
-		{
-			$total_working += $row['time_working'];
-			$total_waiting += $row['time_waiting'];
-		}
-		$return['working'] = ($total_working / $num_row) / (60*60*24);
-		$return['waiting'] = ($total_waiting / $num_row) / (60*60*24);
-	
-		// Returns time in DAYS!
-		return $return;
-	}
-	return null;
-}
+// Generate report statistics
+$today = date("Y-m-d");
+$last_week =  date("Y-m-d", strtotime("-1 week"));
+$this_month =  date("Y-m-1");
 
 // Weekly Stats
 $weekly_opened = numTicketsByVar("open_date", $last_week);
 $weekly_closed = numTicketsByVar("close_date", $last_week);
 $weekly_reopened = getReopenedCount($last_week);
-$times = getTimeInStateOnDate($last_week);
-$weekly_working = $times['working'];
-$weekly_waiting = $times['waiting'];
 
 // Monthly Stats
 $monthly_opened = numTicketsByVar("open_date", $this_month);
 $monthly_closed = numTicketsByVar("close_date", $this_month);
 $monthly_reopened = getReopenedCount($this_month);
-$times = getTimeInStateOnDate($this_month);
-$monthly_working = $times['working'];
-$monthly_waiting = $times['waiting'];
 
 // All-Time Stats
 $total_tickets = numTicketsByVar();
@@ -103,14 +89,9 @@ if ($_REQUEST['start_date'])
 	$open_report = numTicketsBoundByVar ("open_date", $start_date, $end_date);
 	$close_report = numTicketsBoundByVar ("close_date", $start_date, $end_date);
 	$reopen_report = getReopenedCount ($start_date, $end_date);
-
-	$times = getTimeInStateOnDate($start_date, $end_date);
-	$working_report = $times['working'];
-	$waiting_report = $times['waiting'];
 ?>
 <div class="box reportResult"> 
-	<?topCorner();?>
-		<div class="boxHeader">
+		<div class="boxHeader noFold">
 			Report Results
 		</div>
 
@@ -129,27 +110,18 @@ if ($_REQUEST['start_date'])
 				    <td><?=$reopen_report?></td>
 				</tr>
 				<tr>
-					<td class="fLblTicket">Average time ticket was<br/>In Progress/Queued:</td>
-				    <td><?printf("%.2f Days", $working_report)?></td>
-				</tr>
-				<tr>
-					<td class="fLblTicket">Average time ticket was<br/>Pending/Awaiting Pickup:</td>
-				    <td><?printf("%.2f Days", $waiting_report)?></td>
-				</tr>
 			</table>
 		</div>
-	<?bottomCorner();?>
 </div>
 <?}?>
 
 <div class="box reportDate">
-	<?topCorner();?>
-	<div class="boxHeader">
+	<div class="boxHeader noFold">
 		Manual Date Bounds
 	</div>
 
 	<div class="boxContent">
-		<form method="post" action="<?=$PHP_SELF?>">
+		<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
 		<table>
 			<tr>
 				<td>Start Date:</td>
@@ -166,13 +138,11 @@ if ($_REQUEST['start_date'])
 		</table>
 		</form>
 	</div>
-	<?bottomCorner();?>
-	</div>
+</div>
 
-<div class="column1">
+<div style="float:left; width: 300px; padding-left: 40px; margin-right:20px;">
 	<div class="box">
-		<?topCorner();?>
-		<div class="boxHeader">
+		<div class="boxHeader noFold">
 			TCenter Weekly Report
 		</div>
 	
@@ -190,24 +160,14 @@ if ($_REQUEST['start_date'])
 					<td class="fLblTicket">Tickets re-opened this past week:</td>
 				    <td><?=$weekly_reopened?></td>
 				</tr>
-				<tr>
-					<td class="fLblTicket">Average time ticket was<br/>In Progress/Queued:</td>
-				    <td><?printf("%.2f Days", $weekly_working)?></td>
-				</tr>
-				<tr>
-					<td class="fLblTicket">Average time ticket was<br/>Pending/Awaiting Pickup:</td>
-				    <td><?printf("%.2f Days", $weekly_waiting)?></td>
-				</tr>
 			</table>
 		</div>
-		<?bottomcorner();?>
 	</div>
 </div>
 
-<div class="column2">
+<div style="float:left; width: 300px; margin-right:20px;">
 	<div class="box">
-		<?topCorner();?>
-		<div class="boxHeader">
+		<div class="boxHeader noFold">
 			TCenter Monthly Report
 		</div>
 	
@@ -225,30 +185,19 @@ if ($_REQUEST['start_date'])
 					<td class="fLblTicket">Tickets re-opened this month:</td>
 				    <td><?=$monthly_reopened?></td>
 				</tr>
-				<tr>
-					<td class="fLblTicket">Average time ticket was<br/>In Progress/Queued:</td>
-				    <td><?printf("%.2f Days", $monthly_working)?></td>
-				</tr>
-				<tr>
-					<td class="fLblTicket">Average time ticket was<br/>Pending/Awaiting Pickup:</td>
-				    <td><?printf("%.2f Days", $monthly_waiting)?></td>
-				</tr>
 			</table>
 		</div>
-		<?bottomcorner();?>
 	</div>
 </div>
 
-<div class="column3">
+<div style="float:left; width: 300px; margin-right:20px;">
 	<div class="box">
-		<?topCorner();?>
-		<div class="boxHeader">
+		<div class="boxHeader noFold">
 			TCenter All-Time Report
 		</div>
 	
 		<div class="boxContent">
 			# of computers accepted : <?=$total_tickets?><br/>
 		</div>
-		<?bottomcorner();?>
 	</div>
 </div>

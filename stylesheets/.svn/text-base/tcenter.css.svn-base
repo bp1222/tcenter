@@ -1,33 +1,74 @@
-html {
-	margin: 0px;
+/**
+  * tcenter.css
+  *
+  * Main stylesheet for TCenter
+  *
+  * TCenter 3 - Ticket Management
+  * Copyright (C) 2007-2008		Rochester Institute of Technology
+  *
+  * This program is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 3 of the License, or
+  * (at your option) any later version.
+  *
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  *
+  * @author	David Walker	(azrail@csh.rit.edu)
+  */
+
+html, body {
 	padding: 0px;
-	font-size:0.75em;
+	margin: 0px;
+	font-size: .87em;
+	background: #f3f2e2;
+	height: 100%;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-	margin: 0px;
-	padding: 0px;
-	color:#000; 
-	background: #F3F2F2;
+h2 {
+	margin-bottom: 0px;
 }
 
+a {
+	cursor: pointer;
+}
+
+/************************
+ * Main Content Wrapper *
+ ***********************/
+#contentWrapper {
+	padding-bottom: 9em;
+}
+
+#footer {
+	position: relative;
+	text-align: center;
+	clear: both;
+	margin-top: -7.5em
+}
+
+/**********************
+ * Header CSS Content *
+ *********************/
 #topbar{
-	height:68px;
+	position: relative;
+	height:80px;
 	background:#004479;
-	clear:right;
-	font-family:Arial, Helvetica, sans-serif;
 	color:#444444;
 }
 
-#adminNav {
-	position: absolute;
-	top: 1%;
-	right:3px;
-}
-
-#adminNav a {
-	font-weight:bold;
-	color:white;
+#headerbar { 
+	background:#4F6BA0;
+	width:100%;
+    position: absolute;
+    top: 60px;
+    height:20px;
 }
 
 #header {
@@ -43,37 +84,50 @@ body {
 	position: absolute;
 }
 
-#headerbar { 
-	color:#FFF;
-	background:#4F6BA0;
-	font-family:Arial, Helvetica, sans-serif;
-	height:1.8em;
-	width:100%;
-    position: absolute;
-    top: 60px;
-    left: 0px;
-    height:20px;
-    z-index: 100;
+#adminNav {
+	position: absolute;
+	top: 1px;
+	right: 3px;
+	font-size: .94em;
 }
 
-#maincontent {
-	display:block;
-	color:#000000;
-	font-family: "arielbd";
-	font-size: 1.05em;
-	margin-top: 40px;
+#adminNav a {
+	font-weight:bold;
+	color:white;
 }
 
+#authUser {
+	position: absolute;
+	top: 62px;
+	right: 3px;
+	z-index: 150;
+	font-weight:bold;
+	color: #ffffff;
+}
+
+#mainContent {
+	margin-top: 20px;
+}
+
+/*********************
+ * Content CSS Style *
+ ********************/
 .box {
 	display: block;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 	margin: 0 auto;
-	padding: 10px;
+	margin-bottom: 10px;
+	padding: 5px;
+	background:#e0cb6d;
+	border: 2px solid #BF9860;
 }
 
 .boxHeader {
 	text-align: center;
 	color: #444444;
-	border-bottom: 4px solid #a9b99a;
+	border-bottom: 4px solid #99a97a;
 	font-size: 1.5em;
 }
 
@@ -93,7 +147,7 @@ body {
 }
 
 .boxContent {
-	padding: 10px;
+	margin: 8px;
 }
 
 .boxContent a {
@@ -105,75 +159,135 @@ body {
 
 .boxEntry {
 	display: block;
-	width: 100%;
-	border-bottom: 2px solid #999999;
+	border-bottom: 2px solid #99a97a;
 	padding-bottom: 3px;
 	margin-top: 3px;
 }
 
-.reportResult{
-	width: 25%;
-	float: right;
-	margin-right: 20%;
+/**************************
+ * TicketList CSS Content *
+ *************************/
+#ticketListContainer {
+	margin: 0 auto;
+	width: 790px;
 }
 
-.reportDate {
-	width: 25%; 
-	margin-left: 15%;
-	padding-bottom: 2.5%;
+.listColumn1 {
+	float:left;
+	width: 250px;
+	margin-right: 20px;
 }
 
-.column1 {
-float:left;
-width: 25%;
-margin-left:10%;
+.listColumn2 {
+	float: left;
+	width: 250px;
+	margin-right: 20px;
 }
 
-.column2 {
-width: 25%;
-float: left;
+.listColumn3 {
+	float: left;
+	width: 250px;
 }
 
-.column3 {
-width: 25%;
-float: left;
+/*******************
+ * Ticket Page CSS *
+ ******************/
+#ticketContainer {
+	width: 1000px;
 }
 
-.ticketDescription {
-	font-size: .9em;
+.ticketColumn1 {
+	width: 280px;
+	float: left;
+	margin-left: 20px;
 }
 
-.ticketSummary {
-	font-size: .9em;
+.ticketColumn2 {
+	width: 620px;
+	float: left;
+	margin-left: 20px;
+	margin-right: 0;
 }
 
 .password {
 	font-weight: bolder;
 	width: 180px; 
 	float: right; 
-	margin-right: -128%;
+	margin-right: 30px;
 }
 
 .ticketNumber{
 	font-weight: bolder;
 	width: 180px;
+	float: left;
+	margin-left: 30px;
 }
-/* Forms */
+
+.ticketContent {
+	clear: both;
+	display: block;
+	width: 100%;
+}
+
+.tlNumber {
+	font-weight: bolder;
+}
+
+.tlSummary, .tlLastUpdate, .tlLastRcc, .tlCreated {
+	font-size: .9em;
+}
+
+.tlLastRcc {
+	float: right;
+}
+
+.tUpdate {
+	display: block;
+}
+
+.tUpdateDate {
+	display: block;
+	font-weight: bold;
+}
+
+.toDo {
+	margin-left: 100px;
+	width: 498px;
+}
+
+.todoCol1 {
+	float: left;
+	width: 230px;
+}
+
+.todoCol2 {
+	float: left;
+	width: 230px;
+}
+
+/**********************
+ * CSS Tables Content *
+ *********************/
 table {
-	font-size: .95em;
+	display: table;
+	vertical-align: top;
 }
 
-.noborder {
-	border: 0px;
+td {
+	vertical-align: top;
+	min-width: 90px;
 }
 
+/****************
+ * Request Page *
+****************/
 .required{
 	font-size: 1.2em;
 	color: #DD1111;
 }
 
 fieldset {
-	font-family: Arial;
+	font-family: Times;
 }
 
 legend  {
@@ -183,6 +297,7 @@ legend  {
 	background: #d3d3d3;
 	padding: 2px 6px;
 	margin-bottom: 8px;
+	font-family:Arial, Helvetica, sans-serif;
 }
 
 label {
@@ -194,16 +309,29 @@ label {
 	float: left;
 }
 
+.fLblLogin
+{
+	width: 70px;
+	height: 10px; 
+	margin-top: .3em;
+	text-align: right;
+}
+
 .fLblRequest
 {
 	width: 125px;
-	height: 10px; /* Weird bug on firefox for windows rendering */
+	height: 10px; 
+	margin-top: .3em;
 	text-align: right;
 }
 
 .fLblTicket {
 	padding: 2px;
 	margin-bottom: 5px;
+}
+
+.smalltext{
+	font-size: .8em;
 }
 
 input {
@@ -213,9 +341,89 @@ input {
 	margin-bottom: 5px;
 }
 
-.smalltext{
-	font-size: .8em;
+.reportResult{
+	width: 350px;
+    float: right;
+    margin-right: 20%;
 }
+
+.reportDate {
+	width: 250px; 
+	margin-left: 200px;
+	margin-bottom: 50px;
+}
+
+/* OLD UNUSED CSS 
+
+#ticketContainer {
+	width: 1000px;
+}
+
+.ticketColumn1 {
+	width: 310px;
+	float: left;
+	margin-left: 20px;
+}
+
+.ticketColumn2 {
+	width: 610px;
+	float: left;
+	margin-left: 20px;
+}
+
+.password {
+	font-weight: bolder;
+	width: 180px; 
+	float: right; 
+	margin-right: 30px;
+}
+
+.ticketNumber{
+	font-weight: bolder;
+	width: 180px;
+	float: left;
+	margin-left: 30px;
+}
+
+.ticketContent {
+	width: 100%;
+	display: table;
+}
+
+.tlNumber {
+	font-weight: bolder;
+}
+
+.tlSummary, .tlLastUpdate, .tlLastRcc, .tlCreated {
+	font-size: .9em;
+}
+
+.tlLastRcc {
+	float: right;
+}
+
+table {
+	font-size: .95em;
+}
+
+.noborder {
+	border: 0px;
+}
+
+
+
+.tContent, .tContentLarge {
+width: 100%;
+text-align: left;
+}
+
+input {
+	color: #333333;
+	padding: 2px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
 
 textarea {
 color: #333333;
@@ -224,58 +432,4 @@ margin-right: 5px;
 margin-bottom: 5px;
 }
 
-/* End Forms */
-
-/* Corners */
-.corner {
-display:block;
-}
-
-.corner *{
-display:block;
-height:1px;
-overflow:hidden;
-font-size:.01em;
-background:#cbcaac;
-}
-
-.corner1 {
-margin-left:3px;
-margin-right:3px;
-padding-left:1px;
-padding-right:1px;
-border-left:1px solid #e1e0d4;
-border-right:1px solid #e1e0d4;
-background:#d5d4bd;
-}
-
-.corner2 {
-margin-left:1px;
-margin-right:1px;
-padding-right:1px;
-padding-left:1px;
-border-left:1px solid #efeeeb;
-border-right:1px solid #efeeeb;
-background:#d2d1b9;
-}
-
-.corner3 {
-margin-left:1px;
-margin-right:1px;
-border-left:1px solid #d2d1b9;
-border-right:1px solid #d2d1b9;
-}
-
-.corner4 {
-border-left:1px solid #e1e0d4;
-border-right:1px solid #e1e0d4
-}
-
-.corner5 {
-	border-left:1px solid #d5d4bd;
-	border-right:1px solid #d5d4bd;
-}
-
-.cornerfg{
-	background:#cbcaac;
-}
+*/

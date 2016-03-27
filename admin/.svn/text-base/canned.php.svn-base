@@ -1,13 +1,30 @@
 <?
 /**
- * canned.php
- *
- * Stock responce emails
- *
- *	@author	David Walker	(azrail@csh.rit.edu)
- */
+  * canned.php
+  *
+  * stock response emails
+  *
+  * TCenter 3 - Ticket Management
+  * Copyright (C) 2007-2008		Rochester Institute of Technology
+  *
+  * This program is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 3 of the License, or
+  * (at your option) any later version.
+  *
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  *
+  * @author	David Walker	(azrail@csh.rit.edu)
+  */
 
 $title = "Canned Responce";
+include "setup.inc";
 include "inc/header.inc";
 
 if ($_REQUEST['email'] == "yes")
@@ -19,33 +36,32 @@ if ($_REQUEST['email'] == "yes")
 
 	mail($to, $subject, $message, $from);
 
+	$subject = doubleQuote($subject);
+	$message = doubleQuote($message);
+
 	// Update the ticket, then we are going to javascript reload our parent, and reload the page
-	$sql = "SELECT updates FROM ticket WHERE t_id = '".$_REQUEST['t_id']."'";
-	$result = mysql_fetch_assoc(mysql_query($sql));
+    $ticket = new Ticket($_REQUEST['t_id']);
 
-	$old_update = $result['updates'];
-	$update = "<b>".$PHP_AUTH_USER." [".date("m/d/y @ g:iA")."]</b><br/>";
-	$update .= "<b>[Emailed User]</b><br/>";
-	$update .= nl2br($message)."<br/><br/>";
-	$update .= mysql_real_escape_string($old_update);
-	$ticket_update .= "updates = '$update' ";
+    $date = date("m/d/y", time());
+    $time = date("g:i A", time());
 
-	$sql = "UPDATE ticket SET updates = '$update' WHERE t_id = '".$_REQUEST['t_id']."'";
-	mysql_query($sql);
+	$action = "<font color='red'>[Emailed User]</font><br/>";
+    $update = "<span class='tUpdate'><span class='tUpdateDate'>".$tcenter->user->username." [$date @ $time]</span>$action$message</span><br/>".$ticket->getAttrib("updates");
+
+    $ticket->updateAttrib("updates", $update);
+    $ticket->save();
 ?>
 <script language="JavaScript" type="text/javascript">
-  <!--
 	opener.location.reload(true);
-    self.close();
-  // -->
+	window.close();
 </script>
 <?	
 	return;
 }
 else
 {
-	$name = explode(" ", $_REQUEST['name']);
-	$name = $name[0];
+    $ticket = new Ticket($_REQUEST['t_id']);
+	$name = $ticket->owner->getAttrib("name");
 
 	if ($_REQUEST['value'] == "cd") 
 	{ 
@@ -53,11 +69,11 @@ else
 			"Resnet is currently working to complete the repair request ".
 			"you have submitted for your computer. However to continue ".
 			"work on you computer we will need a genuine copy of Microsoft ".
-			"Windows with valid CD key, or the CDs that came with your ".
-			"computer. Please reply to this email or contact the Resnet ".
-			"office at 475-2600 or 475-4927 TTY. Your computer repair ".
+			"Windows with valid cd key, or the cds that came with your ".
+			"computer. Please reply to this email or contact the resnet ".
+			"office at 475-2600 or 475-4927 tty. Your computer repair ".
 			"will be placed on hold until we receive word from you.\n\n".
-			"ITS Resnet Staff
+"ITS Resnet Staff
 Information & Technology Services
 Rochester Institute of Technology
 Nathaniel Rochester Hall, Room 1034
@@ -174,12 +190,8 @@ M-F 9am-9pm
 Sat-Sun 12pm-5pm"; 
 	}
 
-	$query = "SELECT user.username, user.email, user.first_name, user.last_name, ticket.t_id, ticket.u_id FROM user, ticket WHERE ticket.u_id = user.u_id AND ticket.t_id = '".$_REQUEST['t_id']."'";
-	$result = mysql_query($query);
-	$row = mysql_fetch_assoc($result);
-
-	$username = $row['username'];
-	$to = $row['email'];
+	$to = $ticket->owner->getAttrib("email");
+	$username = $ticket->owner->getAttrib("username");
 	$subject = "[RESNET] ".$username."-".$_REQUEST['t_id']." : ".$subject;
 
 	//RIT Email, replaced with user email -- jdwrcc  2-5-07
@@ -189,13 +201,12 @@ Sat-Sun 12pm-5pm";
 }
 ?>
 
-<form method='post' action='<?=$PHP_SELF?>'>
-	<div class="box">
-		<?topCorner();?>
-		<div class="boxHeader">
+<form method='post' action='<?=$_SERVER['PHP_SELF']?>'>
+	<div class="box" style="width: 90%">
+		<div class="boxHeader noFold">
 			Canned Responce
 		</div>
-		<div class="boxConcent">
+		<div class="boxContent">
 			<table width="30%">
 				<tr>
 					<td>To:</td>
@@ -223,11 +234,10 @@ Sat-Sun 12pm-5pm";
 						<input type='hidden' name='to' size='50' value='<?=$to?>'/>
 						<input type='hidden' name='email' value='yes'/>
 						<input type="hidden" name="t_id" value="<?=$_REQUEST['t_id']?>"/>
-						<input type='submit' name='submit' value='Email'/>
+                        <input type="submit" name="submit" value='Email' onclick="window.close(); window.opener.delayRequest(400);"/>
 					</td>
 				</tr>
 			</table>
 		</div>
-		<?bottomCorner();?>
 	</div>
 </form>

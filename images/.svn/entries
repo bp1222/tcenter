@@ -1,19 +1,15 @@
-8
+10
 
 dir
-135
-svn://tcenter.rit.edu/tcenter2/releases/tcenter2.0betas/tcenter2b.7-16-07/images
-svn://tcenter.rit.edu
+42
+file:///home/dave/projects/tcenter3/trunk/images
+file:///home/dave/projects
 
 
 
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
-
-
-svn:special svn:externals svn:needs-lock
-
+2008-07-31T14:23:01.598491Z
+27
+dave
 
 
 
@@ -24,72 +20,11 @@ svn:special svn:externals svn:needs-lock
 
 
 
-d8f50d07-8a63-48aa-b51b-489fc3c4bb95
-
-top_left.gif
-file
 
 
 
 
-2008-03-12T20:53:30.000000Z
-050080ad166ed1f9df3e0401ba52df7c
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
-has-props
-
-bottom_left.gif
-file
-
-
-
-
-2008-03-12T20:53:30.000000Z
-acbadd626c0ad12a09c4953480ee7a8b
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
-has-props
-
-its.gif
-file
-
-
-
-
-2008-03-12T20:53:30.000000Z
-68671008951d5ac3b6583cad1dad4f9e
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
-has-props
-
-top_right.gif
-file
-
-
-
-
-2008-03-12T20:53:30.000000Z
-d6a0a522a308602a646e4c33922f1c6a
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
-has-props
-
-bottom_right.gif
-file
-
-
-
-
-2008-03-12T20:53:30.000000Z
-9f2d64ed907dd2bf139d632c34553617
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
-has-props
+fa5c2e99-6609-419c-b0b2-6f39b90b64f9
 
 collapsed.png
 file
@@ -97,12 +32,33 @@ file
 
 
 
-2008-03-12T20:53:30.000000Z
+2014-07-06T22:53:22.008431Z
 84ee74fb1280786c8124ad817a011326
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
+2008-07-31T14:23:01.598491Z
+27
+dave
 has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+207
 
 shadow.gif
 file
@@ -110,12 +66,33 @@ file
 
 
 
-2008-03-12T20:53:30.000000Z
+2014-07-06T22:53:22.012431Z
 53f7b7a51c20d7286785efe23558e0cd
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
+2008-07-31T14:23:01.598491Z
+27
+dave
 has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4364
 
 expanded.png
 file
@@ -123,12 +100,33 @@ file
 
 
 
-2008-03-12T20:53:30.000000Z
+2014-07-06T22:53:22.004430Z
 f01d00fdebceffcaca40cd213a525ba8
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
+2008-07-31T14:23:01.598491Z
+27
+dave
 has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+209
 
 shadowAlpha.png
 file
@@ -136,12 +134,33 @@ file
 
 
 
-2008-03-12T20:53:30.000000Z
+2014-07-06T22:53:22.004430Z
 b5b27e0dd88d44d4a5d8e63bb61a1239
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
+2008-07-31T14:23:01.598491Z
+27
+dave
 has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3403
 
 stripeslogo.gif
 file
@@ -149,10 +168,201 @@ file
 
 
 
-2008-03-12T20:53:30.000000Z
+2014-07-06T22:53:22.008431Z
 df28df5c56a353a926f63cccc0b3a596
-2007-07-30T19:01:07.641269Z
-1
-jdwrcc
+2008-07-31T14:23:01.598491Z
+27
+dave
 has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8260
+
+top_left.gif
+file
+
+
+
+
+2014-07-06T22:53:22.008431Z
+050080ad166ed1f9df3e0401ba52df7c
+2008-07-31T14:23:01.598491Z
+27
+dave
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3992
+
+bottom_left.gif
+file
+
+
+
+
+2014-07-06T22:53:22.008431Z
+acbadd626c0ad12a09c4953480ee7a8b
+2008-07-31T14:23:01.598491Z
+27
+dave
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4005
+
+its.gif
+file
+
+
+
+
+2014-07-06T22:53:22.008431Z
+68671008951d5ac3b6583cad1dad4f9e
+2008-07-31T14:23:01.598491Z
+27
+dave
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9000
+
+top_right.gif
+file
+
+
+
+
+2014-07-06T22:53:22.008431Z
+d6a0a522a308602a646e4c33922f1c6a
+2008-07-31T14:23:01.598491Z
+27
+dave
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3991
+
+bottom_right.gif
+file
+
+
+
+
+2014-07-06T22:53:22.008431Z
+9f2d64ed907dd2bf139d632c34553617
+2008-07-31T14:23:01.598491Z
+27
+dave
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3996
 

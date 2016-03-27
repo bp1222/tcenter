@@ -1,97 +1,69 @@
-<?
+<?php
 /**
   * ticket.inc
   *
-  * Functions for getting data from the database about tickets
+  * Class to manage a given ticket.
+  *
+  * TCenter 3 - Ticket Management
+  * Copyright (C) 2007-2008		Rochester Institute of Technology
+  *
+  * This program is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 3 of the License, or
+  * (at your option) any later version.
+  *
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   *
   * @author	David Walker	(azrail@csh.rit.edu)
   */
 
-
-/**
-  * getTicketsById
-  *
-  * @return	array() - Result is an array containing ticket information 
-  * @return null - Returns null if 0 are returned
-  */
-function getAllTicketById ($t_id) {
-	global $l_status;
-
-	$sql = "SELECT ticket.*, user.*, machine.* FROM ticket, user, machine WHERE ticket.t_id = '". $t_id ."' AND user.u_id = ticket.u_id AND machine.m_id = ticket.m_id";
-	$result = mysql_query($sql);
-
-	if (mysql_num_rows($result) == 1) {
-		$row = mysql_fetch_assoc($result);
-		$row['status'] = array_search($row['status'], $l_status);
-		return $row;
-	} else {
-		return null;
-	}
-}
-
-/**
-  * getTicketsByStatus
-  *
-  * @return	$result - Result is a MYSQL responce
-  * @return null - Returns null if 0 are returned
-  */
-function getTicketsByStatus ($status) {
-	global $l_status;
-
-	$sql = "SELECT ticket.*, machine.description, machine.m_id, user.username, user.u_id FROM ticket, machine, user WHERE ticket.status = '".$l_status[$status]."' AND ticket.u_id = user.u_id AND ticket.m_id = machine.m_id";
-
-	$result = mysql_query($sql);
-
-	if (mysql_num_rows($result) == 0)
-		return null;
-
-	return buildReturnFromMysql($result);
-}
-
-function buildReturnFromMysql ($result)
+class Ticket extends TCenterDataObject
 {
-	$returns = array();
+	public $owner;
+	public $machine;
 
-	// Build the array to ship back
-	while ($row = mysql_fetch_assoc($result))
+	protected function loadObject($t_id)
 	{
-		$returns[] = $row;
+		$sql = "SELECT * FROM ticket WHERE t_id = '$t_id'";
+
+		if ($this->db->query($sql)->num_rows() != 1)
+			throw new TCenterException("Ticket Information is Bogus");
+
+		$row = $this->db->fetch_assoc();
+		
+		foreach ($row as $k=>$v)
+		{
+			$this->objInfo[$k] = $v;
+		}
+
+		$this->owner = new Owner($this->objInfo['o_id']);
+		$this->machine = new Machine($this->objInfo['m_id']);
 	}
 
+/**************************
+* Public STATIC Functions *
+**************************/
+	public static function getTicketsByStatus ($status)
+	{
+		$db = Database::getInstance();
+		$sql = "SELECT t.t_id, t.summary, t.open_date, m.description, o.username FROM ticket as t, machine as m, owner as o WHERE t.status = '".$status."' AND t.o_id = o.o_id AND t.m_id = m.m_id";
 
-	return $returns;
+		if ($db->query($sql)->num_rows() == 0)
+			return null;
+
+		$ret = array();
+
+		while ($row = $db->fetch_assoc())
+		{
+			array_push($ret, $row);
+		}
+
+		return $ret;
+	}
 }
-
-function getTicketsBySql ($sql) {
-	$result = mysql_query($sql);
-
-	if (mysql_num_rows($result) == 0)
-		return null;
-
-	return buildReturnFromMysql($result);
-}
-
-function longTicketNumber ($t_id)
-{
-	$sql = "SELECT 
-		u.username, u.u_id, t.t_id FROM ticket t, user u 
-		WHERE u.u_id = t.u_id AND t.t_id = '$t_id'";
-	$result = mysql_query($sql);
-	
-	$row = mysql_fetch_assoc($result);
-	
-	// Set variables from the record
-	$u_id = $row["u_id"];
-	$username = $row["username"];
-		
-	// Generate the ticket number
-	return $username."-".$t_id; 
-}
-
-function makeDate ($timestamp)
-{
-	if (empty($timestamp))
-		return "No Last Date";
-	return date("Y-m-d", $timestamp);
-}
-?>
