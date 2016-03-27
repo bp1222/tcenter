@@ -1,333 +1,945 @@
-<?
-/**
-  * request.php
-  *
-  * Requesting new tickets from TCenter
-  *
-  * TCenter 3 - Ticket Management
-  * Copyright (C) 2007-2008		Rochester Institute of Technology
-  *
-  * This program is free software: you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License as published by
-  * the Free Software Foundation, either version 2 of the License, or
-  * (at your option) any later version.
-  *
-  * This program is distributed in the hope that it will be useful,
-  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  * GNU General Public License for more details.
-  *
-  * You should have received a copy of the GNU General Public License
-  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  *
-  * @author	David Walker	(azrail@csh.rit.edu)
-  */
+<? 
+	include("inc/connection.inc");
+	include("inc/header.php");
 
-// include main header
-$title = "Service Request";
-include "inc/header.inc";
-
-// Clear error values
-$errval = array();
-
-// If they didn't accept the agreement from the previous page
-// so if !submt_this_page && !accept_last (Deny only)
-if (!$_REQUEST['submit'] && !$_REQUEST['accept'])
-{
-?>
-	<div class="box" style="text-align: center; width: 40%">
-		<div class="boxContent">
-			In order to employ Resnet for technical support you need to agree to the <a href="index.php"></br><center>Terms of Agreemet</center></a>
-		</div>
-	</div>
-<?
-	return;
-}
-// If they are submitting this form
-if ($_REQUEST['submit'])
-{
-	// Errors
-	$error = array();
-
-	// Check the fields coming in, and build the SQL
-	$otherUser   = doubleQuote(trim($_REQUEST['otherUser'])); 
-	$firstName	 = doubleQuote(trim($_REQUEST['firstName'])); 
-	$lastName	 = doubleQuote(trim($_REQUEST['lastName'])); 
-	$username	 = $tcenter->user->username; 
-	$phone		 = doubleQuote(trim($_REQUEST['phone']));
-	$email		 = doubleQuote(trim($_REQUEST['email'])); 
-	$description = doubleQuote(trim($_REQUEST['description'])); 
-	$loginName	 = doubleQuote(trim($_REQUEST['loginName'])); 
-	$loginPass	 = doubleQuote(trim($_REQUEST['loginPass'])); 
-	$os			 = doubleQuote(trim($_REQUEST['os']));
-	$inventory	 = doubleQuote(trim($_REQUEST['inventory'])); 
-	$problem	 = doubleQuote(trim($_REQUEST['problem'])); 
-	$contact = false;
-
-	// First Name
-	if (empty($firstName) || $firstName == "First")
-		$error["firstName"] = true;
-
-	// Last Name
-	if (empty($lastName) || $lastName == "Last")
-		$error["lastName"] = true;
-
-	// Username
-	{
-		if (empty($username) || $username == "Username")
-			$error["username"] = true;
-
-		if ($tcenter->user->hasPriv("TICKET_MANUAL") && !empty($otherUser))
-			$username = $otherUser;
+	$query = "SELECT time FROM waittime;";
+	$result = pg_query($query);
+	while ($row = pg_fetch_assoc($result)) {
+		$waittime = trim($row['time']);
 	}
 
-	// Operating System 
-	if (empty($os) || $os == "select")
-		$error["os"] = true;
+?>
+<?
 
-	// Phone
-	// Replace all '-' with ' ', then remove spaces.  Then count, digits must = 7 or 10
-	if ($phone = checkPhoneNumber($phone))
-		$contact = true;
-    else
-        $error["phone"] = true;
+	# set variables to null to overwrite url injection
+	$success = "";
+	$accept = "";
+	$submittal = "";
 
-	// Email
-	$email_pattern = "/^[A-Za-z0-9\._-]+@[A-Za-z0-9][A-Za-z0-9-]*(\.[A-Za-z0-9_-]+)*\.([A-Za-z]{2,6})$/";
-	if (!((empty($email) || $email == "Email Address") || preg_match($email_pattern, $email) == 0))
-		$contact = true;
+	# set the user to the currently logged in user
+	$queryuser = $PHP_AUTH_USER;
 
-	if (!$contact)
-	{
-		$error["phone"] = true;
-		$error["email"] = true;
+	# extract data that was sent to this page
+	@extract($_POST);
+
+ if ($problemdescription == "") {?>
+<script type="text/javascript">
+	<!--
+	alert("Resnet Currently Has An Estimated Wait Time Of: <? echo $waittime; ?>")
+	//-->
+</script>
+<?
 	}
 
-	// Descripion
-	if (empty($description) || $description == "Description of Computer")
-		$error["description"] = true;
+	# if they have submitted a request
+	if ($submittal == "yes") {
+?>	
+	<tr>
+		<td>
+			<div style="background-color: eee;
+								  border-style: solid;
+									border-width: 1px;
+									width: 50%;
+									height: auto;
+									font-size: 10pt;
+									color: #ff0000;
+									padding: 10px;
+									text-align: left;"><center><font size="2"><b>Results:</b></font></center><hr>
+<?
 
-	// Problem Description
-	if (empty($problem) || $problem == "")
-		$error["problem"] = true;
+	#this area is to check that all of the data was filled in, 
+	#and filled in properly. If it was filled in properly, 
+	#we will add the entry into the database and the ticket will be created
+	
+	#if all fields are filled in (not including machine)
+	if ($name != "" && $username != "" && $address != "" && $email != "" && $owner != "" && $passwd != "" && $inventory != "" && $problemdescription != "" && $warranty != "") {
 
-	// As long as we don't have errors we should add this ticket into our DB
-	if (empty($error))
-	{
-		$owner = new Owner();
-		$owner->updateAttrib(array("username"=>$username, "name"=>$firstName." ".$lastName, "phone"=>$phone, "email"=>$email));
-		$o_id = $owner->create();
+		#they have chosen a saved machine
+		if ($preload != "") {
+		
 
-		$machine = new Machine();
-		$machine->updateAttrib(array("o_id"=>$o_id, "description"=>$description, "inventory"=>$inventory, "os"=>$os, "login_name"=>$loginName, "login_password"=>$loginPass));
-		$m_id = $machine->create();
+			#query the database to bring out the data for the saved machine
+			#we will call the function that will submit the ticket
 
-		$ticket = new Ticket();
-		$ticket->updateAttrib(array("o_id"=>$o_id, "m_id"=>$m_id, "open_date"=>"", "summary"=>"", "problem"=>$problem, "updates"=>"", "todo"=>defaultToDo($os), "status"=>0, "closed_by"=>"", "repair"=>0, "full"=>0));
-		$t_id = $ticket->create();
+			$query = "SELECT * FROM machines WHERE description = '$preload' AND owner = '$username';";
+			$result = pg_query($query);
+			if (pg_num_rows($result) > 0) {
+				while ($row = pg_fetch_assoc($result)) {
+					
+					$snumber = trim($row['snumber']);
+					$description = trim($row['description']);
+					$mac = trim($row['mac']);
+					$accountname = trim($row['username']);
 
-		// Make Email headers
-		$to = $email;
-		$subject = "[RESNET] ".$username."-".$t_id." : Repair Request Created";
-		$from = "From: restech@rit.edu";
-		$waittime = $system->getAttrib("WaitTime");
-
-		// Kindly Email user information.
-		$message = "Dear $firstName,\n\n".
-			"Thank you for coming to ITS Resnet.  The current estimated wait time ".
-			"for your computer is $waittime.  If you have any further ".
-			"questions feel free to reply to this email or call us referencing ".
-			"ticket number: ".$username."-".$t_id."\n\n".
-			"ITS Resnet Staff
-Information & Technology Services
-Rochester Institute of Technology
-Nathaniel Rochester Hall, Room 1034
-585.475.2600 (voice) 585.475.4927 (tty)
-585.475.6064 (fax)
-Restech@rit.edu
-Hours:
-M-F 9am-9pm
-Sat-Sun 12pm-5pm"; 
-
-		mail ($to, $subject, $message, $from);
-
-?>
-		<div class="box" style="width:30%">
-			<div class="boxHeader" style="font-size: 1.3em;">
-				Your service request has been logged
-			</div>
-			<br/><center>Please make sure all items needed are left at the Resnet office.</center>
-			<br/>
-			<?
-			if ($otherUser)
-				header("Location: admin/index.php");
-			else 
-				session_destroy();?>
-		</div>
-		<script type="text/javascript">
-			function relocate () {
-				location.href = "index.php";
+				}
+			}
+			# no stored machine was found
+			else {
+				echo "We cannot find the stored computer you have chosen<br>";
+				echo "</div></td></tr>";
+				
 			}
 
-			setTimeout('relocate()',15000);	
-		</script>
-<?
-		return;
+			# attempt to make all usernames lowercase
+			$username = strtolower($username);
+
+			# verify the data that is being submitted
+			verify($name, $username, $phone, $address, $email, $owner, $description, $snumber, $mac, $accountname, $passwd, $inventory, $problemdescription, $preload, $queryuser, $warranty, $repairinstall, $fullinstall);
+
+		}
+		#if no data was submitted for the machine
+		elseif ($preload == "" && $snumber == "" && $description == "" && $mac == "" && $accountname == "" && $passwd == "") {
+				echo "Please make sure you have filled in all required fields for a machine, following the proper format.<br>";
+				echo "</div></td></tr>";
+				if ($description == "") {
+					$xdescription = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+				}
+				if ($accountname == "") {
+					$xaccountname = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+				}
+				if ($passwd == "") {
+					$xpasswd = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+				}
+		}
+		#seems they haven't picked a saved machine
+		elseif ($preload == "" && ($snumber != "" || $description != "" || $mac != "" || $accountname != "" || $passwd != "")) {
+
+			#if the new machine was not entered properly
+				if ($description == "" || $passwd == "") {
+				echo "Please make sure you have filled in all required fields for a new machine, following the proper format.<br>";
+				echo "</div></td></tr>";
+				#if ($description == "") {
+				#	$xdescription = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+				#}
+				if ($accountname == "") {
+					$xaccountname = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+				}
+				if ($passwd == "") {
+					$xpasswd = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+				}
+				}
+				else {
+				# this variable will let us know that they have not chosen a stored machine
+				$preload = "";
+
+			# verify the data being submitted
+			verify($name, $username, $phone, $address, $email, $owner, $description, $snumber, $mac, $accountname, $passwd, $inventory, $problemdescription, $preload, $queryuser, $warranty, $repairinstall, $fullinstall);
+			}
+		}
 	}
-	else // There was an error
-	{
-		// Set values to our error value array, this is for data retention
-		global $errval;
-		$errval['firstName'] = $_REQUEST['firstName']; 
-		$errval['lastName']	 = $_REQUEST['lastName']; 
-		$errval['phone'] = $_REQUEST['phone'];
-		$errval['email'] = $_REQUEST['email']; 
-		$errval['description'] = $_REQUEST['description']; 
-		$errval['loginName'] = $_REQUEST['loginName']; 
-		$errval['loginPass'] = $_REQUEST['loginPass']; 
-		$errval['os'] = $_REQUEST['os']; 
-		$errval['inventory'] = $_REQUEST['inventory']; 
-		$errval['problem'] = $_REQUEST['problem']; 
-?>
-	<div class="box" style="width:25%">
-		<div class="boxHeader" style="font-size: 1.3em;">There was an Error</div>
-		Please check to make sure required fields are filled out.
-	</div>
-<?
+
+	#if they haven't filled all the required fields in, tell them
+	else {
+				echo "Please make sure you have filled in all required fields following the proper format.<br>";
+		echo "</div></td></tr>";
+		if ($name == "") {
+			$xname = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		}
+		if ($address == "") {
+			$xaddress = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		}
+		if ($email == "") {
+			$xemail = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		}
+		if ($passwd == "") {
+			$xpasswd = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		}
+		if ($inventory == "") {
+			$xinventory = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		}
+		if ($problemdescription == "") {
+			$xproblemdescription = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		}
+		if ($warranty == "") {
+			$xwarranty = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		}
+		if ($description == "") {
+			$xdescription = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		}
+		if ($accountname == "") {
+			$xaccountname = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		}
 	}
-}
-?>
 
-<form method="post" action="<?$_SERVER['PHP_SELF']?>">
-	<div class="box" style="width:600px">
-		<div class="boxHeader noFold">
-			Resnet Technical Support Request Form
-		</div>
 
-		<div class="boxContent">
-			All of the information on this form is necessary to process your request. If you are not sure how to fill out a certain entry, ask an RCC for help. If you do not fill in all of the data for this sheet, or you fill in the sheet improperly, you will be redirected back to the form until it is properly filled out. 
+	}	
 
-			<hr/>
+		?>
+	<!-- Begin Request Form -->	
+		<h2>Resnet Technical Support Request Form:</h2>
 
-			<p>
-				Note: Fields with a <span class="required">*</span> are required. 
-			</p>
-			<p>
-				Current wait time for machines submitted today is : <b><?=$system->getAttrib("WaitTime")?></b>
-			</p>
+		<br>
+		<form enctype="multipart/form-data" method="post" action="request.php">
+		<table width="60%" align="center">
+			<tr>
+				<td colspan="2">All of the information on this form is necessary to process your request. If you are not sure how to fill out a certain entry, click on the item to get a detailed description of what to fill in. If you do not fill in all of the data for this sheet, or you fill in the sheet improperly, you will be redirected back to the form until it is properly filled out. If any of the information that is auto-filled is incorrect, please correct it before submitting the request. <b>Quotes are not allowed unless specified.</b><br><br><b>Note:</b> A field denoted with a "<font color="#ff0000">*</font>" means the field is required.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><b><u>User Information</u></b></td>
+			</tr>
+			<tr>
+				<td>
+			
+				<?
+				# this is not the submitted form, check to see if the user has stored
+				# user information in the database so we can retrieve it and use it
+				if ($submittal != "yes") {
 
-			<fieldset>
-				<legend>User Information</legend>
+					$queryuser = trim($PHP_AUTH_USER);
+					$query = "SELECT * FROM users where username = '$queryuser';";
+					$result = pg_query($query);
+					if (pg_num_rows($result) > 0) {
+						while ($row = pg_fetch_assoc($result)) {
+							
+							$name = trim($row['name']);
+							$username = trim($row['username']);
+							$phone = trim($row['phone']);
+							$address = trim($row['address']);
+							$email = trim($row['email']);
 
-				<?if ($tcenter->user->hasPriv("ADMIN_MANUAL")){?>
-					<label class="fLblRequest" for="otherUser">Other Username</label>
-						<input type="text" name="otherUser"
-							value="<?=$errval['firstName'] ? $errval['firstName'] : ""?>"
-							size="12" maxlength="7" tabindex="1"/><br/><br/><br/>
-				<?}?>
+						}
+					}
+					# there was no user data in the database, set them to nothing so the
+					# user can fill this information in when the form is loaded
+					else {
 
-				<?=$error['firstName']||$error['lastName']?"<font color='red'>":""?>
-				<label class="fLblRequest" for="firstName"><span class="required">*</span>Name</label>
-				<?=$error['firstName']||$error['lastName']?"</font>":""?>
+						$name = "";
+						$username = "";
+						$phone = "";
+						$address = "";
+						$email = "";
 
-					<input type="text" name="firstName" 
-						value="<?=$errval['firstName']? $errval['firstName'] : "First"?>"
-				    	size="12" maxlength="16" tabindex="1" 
-						<?if(!$errval['firstName'] || $errval['firstName'] == "First"){?>onfocus="clearField(this)"<?}?>/>
+					}
+				}
 
-					<input type="text" name="lastName" 
-						value="<?=$errval['lastName']? $errval['lastName'] : "Last"?>"
-				    	size="12" maxlength="16" tabindex="2" 
-						<?if(!$errval['lastName'] || $errval['lastName'] == "Last"){?>onfocus="clearField(this)"<?}?>/><br/>
+						?>
+							<font color="#ff0000">*</font> <?echo $xname;?>Name: 
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="name" size="50" maxlength="50" value="<? echo $name; ?>">
+						</td>
+					</tr>
+					<tr>
+						<td></td><td style="text-align:center;">
+							Full: [First Middle Last]
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<font color="#ff0000">*</font> Username:
+						</td>
+						<td style="text-align:right;">
+							<input type="text" disabled size="50" maxlength="7" value="<? echo $queryuser; ?>">
+							<input type="hidden" name="username" value="<?echo $queryuser; ?>">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Phone/Pager #:
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="phone" size="50" maxlength="12" value="<? echo $phone; ?>">
+						</td>
+					</tr>
+					<tr>
+						<td></td><td style="text-align:center;">
+							[XXX-XXX-XXXX]
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<font color="#ff0000">*</font> <?echo $xaddress;?>Address:
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="address" size="50" maxlength="50" value="<? echo $address; ?>">
+						</td>
+					</tr>
+					<tr>
+						<td></td><td style="text-align:center;">
+							[Dorm/Apt number or off-campus address]
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<font color="#ff0000">*</font> <?echo $xemail;?>Email:
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="email" size="50" maxlength="50" value="<? echo $email; ?>">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<hr width="85%">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<b><u>Machine Information</u></b>
+						</td>
+					</tr>
+					<tr>
+								
+		<?  
 
-				<span id="phoneHide">
-					<?=$error['phone']?"<font color='red'>":""?>
-					<label class="fLblRequest" for="phone"><span class="required">*</span>Phone</label>
-					<?=$error['phone']?"</font>":""?>
-
-						<input type="text" name="phone"
-							value="<?=$errval['phone']? $errval['phone'] : "xxx-xxx-xxxx"?>"
-							size="13" maxlength="14" tabindex="4"
-							<?if(!$errval['phone'] || $errval['phone'] == "xxx-xxx-xxxx"){?>onfocus="clearField(this)"<?}?>/>
-				</span>
-				<input type="checkbox" name="phonex" onclick="visibility(this); removeInput('phone');"/> Don't have phone<br/>
-
-				<?=$error['email']?"<font color='red'>":""?>
-				<label class="fLblRequest" for="email"><span class="required">*</span>Email or Sidekick</label>
-				<?=$error['email']?"</font>":""?>
-
-					<input type="text" name="email"
-						value="<?=$errval['email']? $errval['email'] : "Email Address"?>"
-						size="35" maxlength="34" tabindex="7"
-						<?if(!$errval['email'] || $errval['email'] == "Email Address"){?>onfocus="clearField(this)"<?}?>/><br/>
-		</fieldset>
-
-		<br/>
-
-		<fieldset>
-			<legend>Machine Information</legend>
-
-			<?=$error['description']?"<font color='red'>":""?>
-			<label class="fLblRequest" for="description">
-				<span class="required">*</span>Description
-			</label>
-			<?=$error['description']?"</font>":""?>
-
-				<input type="text" name="description"
-					value="<?=$errval['description']? $errval['description'] : "Description of Computer"?>"
-			    	size="35" maxlength="34" tabindex="8" 
-					<?if(!$errval['description'] || $errval['description'] == "Description of Computer"){?>onfocus="clearField(this)"<?}?>/><br/>
-
-			<?=$error['os']?"<font color='red'>":""?>
-			<label class="fLblRequest" for="os">
-				<span class="required">*</span>OS / Task
-			</label>
-			<?=$error['os']?"</font>":""?>
-			<select name="os">
-				<option value="select" >Select</option>
-				<option value="Windows"<?=$errval['os'] == "Windows" ? "selected" : ""?>>Windows</option>
-				<option value="MacOS" <?=$errval['os'] == "MacOS" ? "selected" : ""?>>Mac OS</option>
-				<option value="Linux" <?=$errval['os'] == "Linux" ? "selected" : ""?>>Linux</option>
-				<option value="Other" <?=$errval['os'] == "OtherOS" ? "selected" : ""?>>Other</option>
-				<option value="DataBackup" <?=$errval['os'] == "DataBackup" ? "selected" : ""?>>Data Backup</option>
-			</select><br/>
-
-			<label class="fLblRequest" for="loginname">
-				Computer Username
-			</label>
-				<input type="text" name="loginName"
-					value="<?=$errval['loginName']? $errval['loginName'] : ""?>"
-			    	size="35" maxlength="34" tabindex="9" 
-					<?if(!$errval['loginName']){?>onfocus="clearField(this)"<?}?>/><br/>
-
-			<label class="fLblRequest" for="loginPass">
-				Login Password
-			</label>
-				<input type="text" name="loginPass"
-					value="<?=$errval['loginPass']? $errval['loginPass'] : ""?>"
-			    	size="35" maxlength="45" tabindex="10" 
-					<?if(!$errval['loginPass']){?>onfocus="clearField(this)"<?}?>/><br/>
+			# check to see if the user has brought a machine down already so they can 
+			# choose to use the information already stored in the system
 		
-			<label class="fLblRequest" for="inventory">Inventory<br/>
-				<span class="smalltext">Other items left at Resnet</span>
-			</label>
-				<input type="text" name="inventory"
-					value="<?=$errval['inventory']? $errval['inventory'] : ""?>"
-			    	size="35" maxlength="45" tabindex="11" 
-					<?if(!$errval['inventory']){?>onfocus="clearField(this)"<?}?>/>
-		</fieldset>
+			$query = "SELECT description FROM machines WHERE owner = '$queryuser';";
+			$result = pg_query($query);
+			# we have found machines in our database
+			if (pg_num_rows($result) > 0) {
+					?><td colspan="2">If you have brought a machine to Resnet, please select it from the list below, or fill out the form below to add a new computer. If you are choosing a stored machine, please ensure that all field except "Owner" are empty and that you have entered your Machine account password.</td></tr>
+					<tr>
+						<td colspan="2">
+						<!-- Select statement for the stored machines -->
+							<select name="preload" width="90%">
+								<option selected value=""></option>
+				<? 
+				# for each machine, put it's description in the select box for the user 
+				# to choose from
+				while ($row = pg_fetch_assoc($result)) {
+	
+					$storeddescription = trim($row['description']);
+					?>
+								<option value="<? echo $storeddescription . "\">" . $storeddescription ?></option>
+				<? } ?>
+							</select>
+							<a href="editmachines.php">Edit Machine(s)</a>
+					<? if ($submittal != "yes") { ?>
+							<br> Or...
+					<? } ?>
+						</td>
+					</tr>
 
-		<br/>
+			<? }
+				?>
+				
+					<tr>
+						<td colspan="2"><b>
+					<? 
+					# this is not a submitted form yet	
+					if ($submittal != "yes") { ?>
+						Please Add A Computer For Our Records:</b>
+					<? }
+						# the form is a submittal form, so show them what they submitted
+						 else { ?>
+						You have submitted with the following information:</b>
+						<? } ?>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<font color="#ff0000">*</font> <a href="requesthelp.php#owner" target="new">Owner of machine:</a>	
+						</td>
+						<td style="text-align:right;">
+							<input type="text" size="50" disabled value="<? echo $queryuser ?>">
+							<input type="hidden" name="owner" size="50" value="<? echo $queryuser ?>">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<?echo $xdescription;?><font color="#ff0000">*</font> <a href="requesthelp.php#description" target="new">Description:</a>
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="description" size="50" maxlength="200" value="<? echo $description ?>">
+						</td>
+					</tr>
+					<tr>
+						<td></td><td style="text-align:right;">
+							[examples: Dell GX260, Thermaltake with Window]
+						</td>
+					</tr>
+					<!--<tr>
+						<td>
+							<a href="requesthelp.php#serial" target="new">Serial # or Service Tag #:</a>
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="snumber" size="50" maxlength="50" value="<? echo $snumber ?>">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="requesthelp.php#mac" target="new">MAC Address:</a>
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="mac" size="50" maxlength="17" value="<? echo $mac ?>">
+						</td>
+					</tr> -->
+					<tr>
+						<td>
+							<a href="requesthelp.php#username" target="new">Username to log in with:</a>
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="accountname" size="50" maxlength="50" value="<? echo $accountname ?>">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><br>Passwords are required to be entered for existing and new machines. Passwords are cleared from our records for security purposes when you pick up your machine. If you do not have a password to log into the machine, please put "n/a".</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							<?echo $xpasswd;?><font color="#ff0000">*</font> <a href="requesthelp.php#password" target="new">Machine account password:</a>
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="passwd" size="50" maxlength="50" value="<? if(!isset($passwd)) { echo "n/a";} else {echo $passwd;} ?>"><br><b>Note:</b> password is viewable so you can confirm it
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							<?echo $xinventory;?><font color="#ff0000">*</font> <a href="requesthelp.php#items" target="new">Items brought into Resnet:</a>
+						</td>
+						<td style="text-align:right;">
+							<input type="text" name="inventory" size="50" maxlength="120" value="<? echo $inventory ?>"><br>[examples: tower, laptop, power adapter]
+						</td>
+					</tr>
+                                        <tr>
+                                                <td valign="top">
+                                                        <?echo $xwarranty;?>Is Your Computer Under Warranty?:
+                                                </td>
 
-		<fieldset>
-			<legend>Problem Information</legend>
-			<?=$error['problem']?"<font color='red'>":""?>
-			<label class="fLblRequest" for="problem"><span class="required">*</span>Problem Description</label>
-			<?=$error['problem']?"</font>":""?>
-			<textarea name="problem" rows="15" cols="50" tabindex="12"><?=$errval['problem']? $errval['problem'] : ""?></textarea>	
+<?php
+	// If a warranty was previously selected add the "checked" tag
+	// to the radio html
+	if ( $_POST['warranty'] == "Yes" ) {
+		$warrantyYes = "checked";
+	} else if ( $_POST['warranty'] == "No" ) {
+		$warrantyNo = "checked";
+	}
+?>
 
-		</fieldset>
-		<input type="submit" name="submit" value="Submit" tabindex="13"/>
-		</div>
-	</div>
-</form>
+                                                <td style="text-align:center;">
+                                                        Yes&nbsp;<input type="radio" name="warranty" value="Yes" <?php echo $warrantyYes; ?>>&nbsp;No&nbsp;<input type="radio" name="warranty" value="No" <?php echo $warrantyNo; ?>>
+                                                </td>
+                                        </tr>
+					<tr>
+						<td colspan="2">
+							<hr width="85%">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<b><u>Repair and Full Installs</u></b>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top" colspan="2">
+							It is standard procedure for Resnet to exhaust all options in an attempt to fix a computer. In the event that the problem cannot be fixed, we will attempt the following steps in order to repair your computer:<br>
+							1) <b>Repair Installation:</b> This will not remove any of the programs or data on your machine, but to be sure, we will attempt to back up all non-copyrighted data beforehand (we cannot backup your software, applications, or copyrighted data).<br> 
+							2) <b>Full Installation:</b> This is only attempted if the Repair Installation fails. This removes all data and programs, but again your non-copyrighted data will be backed up beforehand.<br><br>
+							In order to complete either a Repair or a Full Installation you will need to provide a <b>licensed</b> copy of the Operating System. Please be sure to provide us with the appropriate CD to expedite your service.<br><br>
+						</td>
+					</tr>
+					<tr>
+						<td> Do you grant permission for Resnet to attempt a Repair and/or Full install if it is needed?
+						</td>
+
+<?php
+	// If the repair or full install checkboxes were previously selected
+	// set their html input tag to "checked"
+	if ( isset($_POST['repairinstall']) ) {
+		$repairChecked = "checked";
+	}
+
+	if ( isset($_POST['fullinstall']) ) {
+		$fullChecked = "checked";
+	}
+?>
+
+						<td style="text-align:center;">
+							Repair Install:&nbsp;<input type="checkbox" name="repairinstall">&nbsp;Full Install:&nbsp;<input type="checkbox" name="fullinstall">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<hr width="85%">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<?echo $xproblemdescription;?><font color="#ff0000">*</font><b><u>Problem Description</u></b>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Please describe to us what the issue is you are having, when it started, what you did to produce the issue, and any error messages you may have encountered:<br><br><b>Note:</b> quotes, commas, periods, -'s, ()'s, ?'s and !'s allowed only for punctuation.
+						</td>
+						<td style="text-align:right;">
+							<textarea name="problemdescription" cols="47" rows="15"><? echo stripslashes($problemdescription) ?></textarea>
+						</td>
+					</tr>
+					<tr>
+					<? 
+					# if the form was not successful, or if they haven't submitted yet
+					# give them a submit button. This is so after the user has submitted
+					# their request, they cannot resubmit it immediately
+					if ($success != "success") { ?>
+						<td colspan="2" style="text-align:right;"><input type="hidden" name="submittal" value="yes"><input type="hidden" name="accept" value="Accept"> <input type="submit" name="submit" value="Submit">
+						</td>
+					<? } ?>
+					</tr>
+				</table>
+				</form>
+				</center>
+				<br><p>Copyright &copy; 2004, 2005 Michael Goffin
+
+</body>
+</html>
+
+<?
+# verify the data that is being submitted. 
+#
+# the do_submit variable will let us know if all data has passed the test
+function verify($name, $username, $phone, $address, $email, $owner, $description, $snumber, $mac, $accountname, $passwd, $inventory, $problemdescription, $preload, $queryuser, $warranty, $repairinstall, $fullinstall) {
+
+	#initialize submit variable
+	$do_submit = "yes";
+
+	#verify name
+	$okay = verifyname($name);
+	if ($okay == "FALSE") {
+		echo "Please provide a valid name (First Last)<br>";
+		$xname = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify username
+	$okay = verifyusername($username);
+	if ($okay == "FALSE" || strlen($username) < '6' || strlen($username) > '7') {
+		echo "Please provide a valid username (your RIT ID)<br>";
+		$xusername = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify phone number
+	$okay = verifyphone($phone);
+	if ($okay == "FALSE" && $phone != "") {
+		echo "Please provide a valid phone number (###-###-####)<br>";
+		$xphone = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify address
+	$okay = verifyaddress($address);
+	if ($okay == "FALSE") {
+		echo "Please provide a valid address (Room# Building/Apartment or House/Apt#, Street)<br>";
+		$xaddress = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify email address
+	$okay = verifyemail($email);
+	if ($okay == "FALSE") {
+		echo "Please provide a valid email address<br>";
+		$xemail = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify description
+	$okay = verifydescription($description);
+	if ($okay == "FALSE") {
+		echo "Please provide a valid computer description (refrain from using non-alphanumeric characters)<br>";
+		$xdescription = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify snumber
+	$okay = verifysnumber($snumber);
+	if ($okay == "FALSE" && $snumber != "") {
+		echo "Please provide a valid serial/service tag number<br>";
+		$xsnumber = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify mac
+	$okay = verifymac($mac);
+	if ($okay == "FALSE" && $mac != "") {
+		echo "Please provide a valid MAC address<br>";
+		$xmac = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify account name 
+	$okay = verifyaccountname($accountname);
+	if ($okay == "FALSE" && $accountname != "") {
+		echo "Please provide a valid user account for your machine<br>";
+		$xaccountname = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify account password 
+	$okay = verifypasswd($passwd);
+	if ($okay == "FALSE" && $passwd != "n/a" && $passwd != "N/A") {
+		echo "Please provide a valid password for your user account<br>";
+		$xpasswd = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify inventory
+	$okay = verifyinventory($inventory);
+	if ($okay == "FALSE") {
+		echo "Please provide valid information about the items you are bringing<br>";
+		$xinventory = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	#verify problem description 
+	$okay = verifyproblem($problemdescription);
+	if ($okay == "FALSE" | strlen($problemdescription) > 10000) {
+		echo "Please provide a valid description of the problem you are having<br>";
+		$xproblemdescription = "<font color=\"red\" size=\"5pt\"><b>!</b></font>";
+		$do_submit = "no";
+	}
+	
+
+	#if the submit variable is still good, we can submit the verified data
+	if ($do_submit == "yes") {
+		submit($name, $username, $phone, $address, $email, $owner, $description, $snumber, $mac, $accountname, $passwd, $inventory, $problemdescription, $preload, $queryuser, $warranty, $repairinstall, $fullinstall);
+
+	}
+	# the varification did not go so well, this closes the error messages received
+	else {
+		echo "</div></td></tr>";
+	}
+
+
+}
+
+#verify name
+function verifyname($name) {
+
+					# they must provide a First and Last name minimally, with any amount
+					# of middle names, all containing letters A-Z, a-z, '-' and '''
+					trim($name);
+					$pattern = "/^([A-z\'-]+ ){1,}([A-z\'-]+)$/";
+					return !preg_match($pattern,$name);
+
+}
+
+#verify username
+function verifyusername($username) {
+
+					# the username must contain only letters A-Z, a-z, and 0-9
+					trim($username);
+					$pattern = "/^[^ ][A-z0-9]*$/";
+					return !preg_match($pattern,$username);
+
+}
+
+#verify phone number
+function verifyphone($phone) {
+
+					# the phone number must be in the form XXX-XXX-XXXX
+					trim($phone);
+					$pattern = "/^[^ ][0-9 \(\)\.-]*$/";
+					return !preg_match($pattern,$phone);
+
+}
+
+#verify address
+function verifyaddress($address) {
+
+					# the address can only contain letters A-Z, a-z, 09, '#', '.', and '-'
+					trim($address);
+					$pattern = "/^[^ ][A-z0-9 \s#\.\-,]*$/";
+					return !preg_match($pattern,$address);
+
+}
+
+#verify email function
+function verifyemail($email) {
+
+					# provide a valid email address of letters A-Z, a-z, '.', '_', and '-'
+					# followed by '@'. The next character must be a letter A-Z, a-z, or 0-9
+					# which can be followed by any amount of letters A-Z, a-z, 0-9, and '-'.
+					# there must be a '.' followed by any amount of letters A-Z, a-z, 0-9,
+					# '_' and '-', and have potentially 2-6 sets of those (that is to 
+					# simulated something like @rit.edu, @it.rit.edu, etc all being valid)
+					trim($email);
+					$pattern = "/^[A-z0-9\._-]+"
+					         . "@"
+							     . "[A-z0-9][A-z0-9-]*"
+							     . "(\.[A-z0-9_-]+)*"
+							     . "\.([A-z]{2,6})$/";
+				  return preg_match ($pattern, $email);
+}
+
+#verify description
+function verifydescription($description) {
+
+					# the description can contain any letters A-Z, a-z, 0-9, '.', '!', '?',
+					# ''', ',', and '()'
+					trim($description);
+					$pattern = "/^[A-z0-9 \s\.\!\?\'\,\(\)-]*$/";
+					#return preg_match($pattern,$description);
+					return "TRUE";
+
+}
+
+#verify serial/service tag #
+function verifysnumber($snumber) {
+
+					# the snumber can contain any letters A-Z, a-z, 0-9, and '-'
+					trim($snumber);
+					$pattern = "/^[A-z0-9\s-]*$/";
+					return preg_match($pattern,$snumber);
+
+}
+
+#verify mac address 
+function verifymac($mac) {
+
+					# the mac must have 6 sets of 2 numbers and/or letters, divided by ':' or '-' 
+					trim($mac);
+					$pattern = "/^([A-Fa-f0-9]{1,2}[:-]){5}[A-Fa-f0-9]{1,2}$/";
+					return preg_match($pattern,$mac);
+
+}
+
+#verify account name
+function verifyaccountname($accountname) {
+
+					# account on computer can only contain letters A-Z, a-z, 0-9, '.', '*', '~'
+					# and '-'
+					trim($accountname);
+					$pattern = "/^[A-z0-9 \.\*~-]*$/";
+					return preg_match($pattern,$accountname);
+
+}
+
+#verify account password
+function verifypasswd($passwd) {
+
+					# currently the password is not checked, but this is where it would go
+					#$pattern = "/^$/";
+					#return preg_match($pattern,$accountname);
+					trim($passwd);
+
+}
+
+#verify inventory 
+function verifyinventory($inventory) {
+
+					# the inventory can contain only letters A-Z, a-z, 0-9, '.', ''', ',', '()'
+					# and '-'
+					trim($inventory);
+					$pattern = "/^[A-z0-9 \s\.\'\,\(\)-]*$/";
+					return preg_match($pattern,$inventory);
+
+}
+
+#verify problem description 
+function verifyproblem($problemdescription) {
+
+					# the problem description can contain only letters A-Z, a-z, 0-9, '.', 
+					# ''', ',', '()', line breaks, and '-'
+					trim($problemdescription);
+					$pattern = "/^[A-z0-9 \s\.\!\?\@\*\#\&\'\"\,\(\)-]*$/";
+					#return preg_match($pattern,$problemdescription);
+					return "TRUE";
+
+}
+
+# replace all " with their HTML Ampersand Character Code of &quot;
+# currently not used
+function replacequote($replace) {
+
+					# this will replace any qoutes with the html equivalent
+					return preg_replace("\"", "&quot;", $replace);
+
+}
+
+# submit the data
+
+function submit($name, $username, $phone, $address, $email, $owner, $description, $snumber, $mac, $accountname, $passwd, $inventory, $problemdescription, $preload, $queryuser, $warranty, $repairinstall, $fullinstall) {
+
+	# need to check if they have changed any values for the user information
+	# as well as update the inventory for the machine, or create a whole new
+	# machine entry if necessary (can be checked if preload has a value).
+	# once we know what to update, update it, and then create a new ticket.
+	# the new ticket requires manipulation of the submitted data for our
+	# purposes. that info will be created before doing any database updating
+	# for the ticket.
+
+	#global variable to notify us of sucessful creation so we can
+	#remove submit button
+	global $success;
+
+	#The first line of business, believe it or not is to figure out what the TID
+	#of the last ticket was that was entered into the system. That number + 1, along
+	#with the username of this individual will be the ticket#
+
+	$query = "SELECT tid FROM tickets ORDER BY tid DESC LIMIT 1;";
+	$result = pg_query($query);
+	if (pg_num_rows($result) == 1) {
+		while ($row = pg_fetch_assoc($result)) {
+			
+			$tidnumber = trim($row['tid']) + 1;
+
+		}
+	}
+	# pray this does not happen. This means the data in the table was completely erased
+	# or that the table was scraped and rebuilt
+	else {
+		#echo "tid cannot be found (THIS IS NOT GOOD)<br>";
+	}
+
+		# ticket # is the following: username-TID
+	
+		$ticketid = $username . "-" . $tidnumber; 
+
+	#first deal with the user information. If the information is new, add it
+	#If the information is the same as the database, don't worry about it
+	#If the information has changed, mofidy it
+
+	$query = "SELECT * from users WHERE username = '$username';";
+	$result = pg_query($query);
+	if (pg_num_rows($result) > 0) {
+	#there is an entry for the user
+	while ($row = pg_fetch_assoc($result)) {
+
+		$storedname = trim($row['name']);
+		$storedusername = trim($row['username']);
+		$storedphone = trim($row['phone']);
+		$storedaddress = trim($row['address']);
+		$storedemail = trim($row['email']);
+
+	}	
+		#they have changed their stored info, time to update it
+		if ($name != $storedname || $username != $storedusername || $phone != $storedphone || $address != $storedaddress || $email != $storedemail) {
+
+			# the query to update the user information
+			$query = "UPDATE users SET name = '$name', username = '$username', phone = '$phone', address = '$address', email = '$email' WHERE username = '$queryuser';";
+
+			$result = pg_query($query);
+			if (pg_affected_rows($result) == 1) {
+				#echo "User Information Has Been Updated<br>";
+			}
+			else {
+				#echo "User Information Was Not Updated<br>";
+			}
+		}
+		else {
+			#echo "Username is already there with no changes needed<br>";
+		}
+	}
+	else {
+		#no rows have been found, so we must update the database with the user info
+		# phone numbers are not required. If it was not filled in, don't add it in 
+		# the query
+		if ($phone != "") {
+			$query = "INSERT INTO users (\"name\", \"username\", \"phone\", \"address\", \"email\") values('$name', '$username', '$phone', '$address', '$email');";
+		}
+
+		# the phone number was added, so add it to the query
+		else {
+			$query = "INSERT INTO users (\"name\", \"username\", \"address\", \"email\") values('$name', '$username', '$address', '$email');";
+		}
+		$result = pg_query($query);
+		if (pg_affected_rows($result) == 1) {
+			#echo "User Information Has Been Added To Database<br>";
+		}
+		else {
+			#echo "User Information Has Not been Added<br>";
+		}
+	}
+
+	#now we have to update the machine information
+	#the TID we got before will be used to add a ticket # to this machine
+
+	#if the machine exists, update the inventory and the ticket # it has
+
+	if ($preload != "") {
+		#they chose a preloaded machine, find its entry, and update
+		#inventory, password, and ticket#
+
+
+		$query = "UPDATE machines SET inventory = '$inventory', password = '$passwd', tcnumber = '$ticketid', warranty = '$warranty' WHERE description = '$description' AND owner = '$username';";
+		$result = pg_query($query);
+		if (pg_affected_rows($result) == 1) {
+			#echo "Machine information updated successfully<br>";
+		}
+		else {
+			#echo "Machine information not updated<br>";
+		}
+	}
+	else {
+
+		#they have a new machine, throw it in!
+
+		# there are 4 cases, snumber and mac are empty, one or the other is empty, 
+		# or both are full. the following queries reflect those 4 cases
+		if ($snumber == "" && $mac == "") {
+			$query = "INSERT INTO machines (\"inventory\", \"description\", \"username\", \"password\", \"owner\", \"tcnumber\", \"warranty\") values('$inventory', '$description', '$accountname', '$passwd', '$owner', '$ticketid', '$warranty');";
+		}
+		elseif ($snumber == "" && $mac != "") {
+			$query = "INSERT INTO machines (\"inventory\", \"mac\", \"description\", \"username\", \"password\", \"owner\", \"tcnumber\", \"warranty\") values('$inventory', '$mac', '$description', '$accountname', '$passwd', '$owner', '$ticketid', '$warranty');";
+		}
+		elseif ($mac == "" && $snumber != "") {
+			$query = "INSERT INTO machines (\"snumber\", \"inventory\", \"description\", \"username\", \"password\", \"owner\", \"tcnumber\", \"warranty\") values('$snumber', '$inventory', '$description', '$accountname', '$passwd', '$owner', '$ticketid', '$warranty');";
+		}
+		else {
+			$query = "INSERT INTO machines (\"snumber\", \"inventory\", \"mac\", \"description\", \"username\", \"password\", \"owner\", \"tcnumber\", \"warranty\") values('$snumber', '$inventory', '$mac', '$description', '$accountname', '$passwd', '$owner', '$ticketid', '$warranty');";
+		}
+		$result = pg_query($query);
+		if (pg_affected_rows($result) == 1) {
+			#echo "Machine Has Been Added To Database<br>";
+		}
+		else {
+			#echo "Machine Has Not been Added<br>";
+		}
+	}
+
+	#and finally, we create the ticket. this should never be updated, but always
+	#be new
+	#we set the date, and the status of the ticket to be new, and the queue to be 	#unassigned
+
+		# create the current date in the format xx/xx/xxxx
+		$thedate = date("F d, Y");
+		# set default status to New
+		$status = "New";
+		# put the ticket in the unassigned queue first
+		$queue = "Unassigned";
+		# initial entry in the progress to know when the ticket was created
+		$progress = "<b>tcenter [ " . date("m/d/y @ g:iA") . " ]</b> ::ticket generated::";
+
+		# check for repair install
+		if ($repairinstall != "") {
+			$repairinstall = "true";
+		}
+		else {
+			$repairinstall = "false";
+		}
+
+		# check for full install
+		if ($fullinstall != "") {
+			$fullinstall = "true";
+		}
+		else {
+			$fullinstall = "false";
+		}
+
+		$requestip = trim($_SERVER["REMOTE_ADDR"]);
+
+		# insert the data into the ticket table
+		$query = "INSERT INTO tickets (\"username\", \"tcnumber\", \"date\", \"description\", \"status\", \"progress\", \"queue\", \"repairinstall\", \"fullinstall\", \"requestedfrom\") values('$username', '$ticketid', '$thedate', '$problemdescription', '$status', '$progress', '$queue', '$repairinstall', '$fullinstall', '$requestip');";
+		$result = pg_query($query);
+		if (pg_affected_rows($result) == 1) {
+
+			# look at the current tasks in the database
+			$query = "SELECT taskid FROM tasks ORDER BY taskid DESC LIMIT 1";
+			$result = pg_query($query);
+			while ($row = pg_fetch_assoc($result)) {
+				$index = trim($row['taskid']);
+			}
+			# put ticket-specific tasks in the link table
+			for ($i = 1;$i <= $index;$i++) {
+				$query = "INSERT INTO link (\"task\", \"ticket\") values('$i', '$ticketid');";
+				$result = pg_query($query);
+			}
+			# let the user know the ticket was successfully submitted
+			echo "<center><font color=\"#0000ff\">Your request has been logged. Please bring your machine to Resnet along with any items required to fix your issue.<br><br>Please close this window before leaving.</font></center>";
+			$success = "success";
+
+		}
+		# the ticket was not submitted
+		else {
+			#echo "The Ticket Has Not Been Created";
+		}
+			echo "</div></td></tr>";
+	}
+
+?>
+
+<?
+# close the database
+pg_close($db_connect); ?>

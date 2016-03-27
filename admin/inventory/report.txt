@@ -1,0 +1,89 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+		<meta name="generator" content="Adobe GoLive 4">
+		<title>Inventory Report</title>
+		<style type="text/css"><!--
+.headings { color: #000; font-size: 12pt; font-family: Verdana }
+.notice { color: black; font-weight: bold; font-family: Verdana }
+.plaintext { color: black; font-size: 10pt; font-family: Verdana }
+.remarks { color: black; font-style: italic; font-size: 8pt }
+.titles { color: black; font-size: 16pt; font-family: Verdana }-->
+		</style>
+	</head>
+
+	<body class="plaintext">
+		Inventory report<br>
+		This report was created on:
+		<p>General infomation</p>
+		<p>Computer in database:<br>
+		Hardware entries:<br>
+		Software entries:</p>
+		<p>Software in database</p>
+		<p><!-- Here comes the software -->
+		</p>
+		<p>Hardware in database</p>
+		<p><!-- Here comes the hardware -->
+		</p>
+		<p>Detailed infomation</p>
+		<p>
+		<table border="4" cellpadding="0" cellspacing="2">
+			<tr>
+				<td class="plaintext" width="120">Computername:</td>
+				<td class="plaintext">compname</td>
+			</tr>
+			<tr>
+				<td class="plaintext" width="120">IP&nbsp;Address:</td>
+				<td class="plaintext"></td>
+			</tr>
+			<tr>
+				<td width="120" align="left" valign="top">Hardware:</td>
+				<td>
+					<table border="4" cellpadding="0" cellspacing="2" width="200">
+						<tr>
+							<td class="plaintext"><u>type</u></td>
+							<td class="plaintext"><u>model</u></td>
+							<td class="plaintext"><u>make</u></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td width="120" align="left" valign="top">Software:</td>
+				<td>
+					<table border="4" cellpadding="0" cellspacing="2">
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td width="120">Operating system:</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td width="120" align="left" valign="top">Other:</td>
+				<td></td>
+			</tr>
+		</table>
+	</body>
+
+</html>

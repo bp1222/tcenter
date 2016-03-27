@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>Adding a plotarea</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">graphpite</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="../classtrees_graphpite.html" class="menu">class tree: graphpite</a> ]
+		  [ <a href="../elementindex_graphpite.html" class="menu">index: graphpite</a> ]
+		  [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_graphpite.html">graphpite</a><br />
+              <a href="../li_axis.html">axis</a><br />
+              <a href="../li_color.html">color</a><br />
+              <a href="../li_common.html">common</a><br />
+              <a href="../li_datapreprocessor.html">datapreprocessor</a><br />
+              <a href="../li_dataselector.html">dataselector</a><br />
+              <a href="../li_dataset.html">dataset</a><br />
+              <a href="../li_figure.html">figure</a><br />
+              <a href="../li_fillstyle.html">fillstyle</a><br />
+              <a href="../li_text.html">text</a><br />
+              <a href="../li_grid.html">grid</a><br />
+              <a href="../li_layout.html">layout</a><br />
+              <a href="../li_legend.html">legend</a><br />
+              <a href="../li_linestyle.html">linestyle</a><br />
+              <a href="../li_logo.html">logo</a><br />
+              <a href="../li_marker.html">marker</a><br />
+              <a href="../li_Image_Graph.html">Image_Graph</a><br />
+              <a href="../li_plottype.html">plottype</a><br />
+              <a href="../li_plotarea.html">plotarea</a><br />
+            <br /><br />
+		<b>Tutorials/Manuals:</b><br />
+					<strong>Package-level:</strong>
+							<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.pkg.html">How to use GraPHPite</a>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.graphp.pkg.html">Creating the Graph</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.plotarea.pkg.html">Adding a plotarea</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.dataset.pkg.html">Creating the dataset</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.plottype.pkg.html">Adding plots</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.modify.pkg.html">Modifying appearance</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.layout.pkg.html">Plot Layout</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.legend.pkg.html">Using Legends</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.example.pkg.html">Graph example</a>
+</ul>
+</li></ul>
+
+							<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.pkg.html">GraPHPite</a>
+</ul>
+
+									                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../graphpite/_Graph_Config_php.html">		Config.php
+		</a><br>
+			<a href="../graphpite/_Graph_php.html">		Graph.php
+		</a><br>
+	  </div><br />
+      
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="10%" align="left" valign="bottom"><a href=
+"../graphpite/tutorial_graphpite.howto.graphp.pkg.html">Prev</a></td>
+<td width="80%" align="center" valign="bottom"></td>
+<td width="10%" align="right" valign="bottom"><a href=
+"../graphpite/tutorial_graphpite.howto.dataset.pkg.html">Next</a></td>
+</tr>
+</table>
+<div><a name=""></a><div class="ref-title-box">Adding a plotarea<h1 class="ref-title">Adding a plotarea</h1>
+		<h2 class="ref-purpose">The GraPHPite Tutorial</h2></div>
+	<div class="ref-synopsis"><span class="author">Nosey
+			<div class="author-blurb"><a href="http://graphpite.sourceforge.net">GraPHPite on SourceForge</a></div></span></div>
+	<span><a name="intro"></a><h2 class="title">Adding a plotarea</h2><p>Afterwards you must create one or more PlotArea(s) to use for plotting. 
+			After you have created the GraPHP object you must add all other elements, either directly
+			to the GraPHP object or an object that has a parent-child chain that terminates in the
+			GraPHP object, ie GraPHP-&gt;PlotArea-&gt;LineChart-&gt;add(Marker) (this is not actual code!).</p>
+		<p>To add a new PlotArea to the Graph do either of the following.</p>
+		<p><div class="listing"><pre><ol><li>..</li>
+<li><span class="src-var">$Graph</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-key">new </span><span class="src-id">PlotArea</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-str">&quot;PlotArea&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>...</li>
+</ol></pre></div></p>
+		<p>or a less compact but perhaps more comprehensible version.</p>
+		<p><div class="listing"><pre><ol><li>...</li>
+<li><span class="src-var">$PlotArea </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">PlotArea</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><span class="src-var">$Graph</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-var">$PlotArea</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><span class="src-comm">// or</span></li>
+<li><span class="src-var">$Graph</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-var">$PlotArea </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">PlotArea</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+<li>...</li>
+</ol></pre></div></p>
+		<p>In the first example by specifying the name &quot;PlotArea&quot; as a second parameter will cause the
+			add function to automatically create a global variable pointing to the newly created object,
+			ie the &quot;new PlotArea()&quot; parameter. This option is included for 2 reasons: 1) It makes the
+			code less cluttered by reducing the number of assignments 2) It reduces the risk of forgetting
+			an &quot;&amp;&quot; (ampersand) after the &quot;=&quot; (equals) sign. The &quot;&amp;&quot; is VERY important, especially if you
+			want to modify/add to the object after the add. Cause PHP 4 assigns by making a copy of the
+			object instead of by reference. So if the &quot;&amp;&quot; is forgotten and you make (some) changes to
+			the created object, they will not be applied to the &quot;added&quot; object because it is another
+			copy. The following pseudo code will demonstrate this:</p>
+		<p><div class="listing"><pre><ol><li><span class="src-var">$A </span>= <span class="src-key">new </span><span class="src-id">A</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;    </span><span class="src-comm">// create an instance of the A class and assign it to $A</span></li>
+<li><span class="src-var">$B </span>= <span class="src-var">$A</span><span class="src-sym">;         </span><span class="src-comm">// assign $A to $B, this makes a COPY of $A and stores it in $B</span></li>
+<li><span class="src-sym">&amp;</span><span class="src-var">$A </span>== <span class="src-sym">&amp;</span><span class="src-var">$B</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+		<p>Line 3 in the above example will evaluate to FALSE, because $B is a COPY of $A and therefore
+			it will NOT refer to the same object (this is pseudo PHP code!).</p>
+		<p>On the other hand if you did the following:</p>
+		<p><div class="listing"><pre><ol><li><span class="src-var">$A </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">A</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;    </span><span class="src-comm">// create an instance of the A class and assign THE REFERENCE to it to $A</span></li>
+<li><span class="src-var">$B </span>= <span class="src-sym">&amp;</span><span class="src-var">$A</span><span class="src-sym">;         </span><span class="src-comm">// assign THE REFERENCE of $A to $B</span></li>
+<li><span class="src-sym">&amp;</span><span class="src-var">$A </span>== <span class="src-sym">&amp;</span><span class="src-var">$B</span><span class="src-sym">;</span></li>
+</ol></pre></div></p>
+		<p>Line 3 in the above example will evaluate to TRUE, because $B is a reference to $A and therefore
+			it will refer to the same object (this is pseudo PHP code!), ie the reference/pointer is the same.</p></span></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="33%" align="left" valign="top"><a href="../graphpite/tutorial_graphpite.howto.graphp.pkg.html">Prev</a></td>
+<td width="34%" align="center" valign="top"><a href=
+"../graphpite/tutorial_graphpite.howto.pkg.html">Up</a></td>
+<td width="33%" align="right" valign="top"><a href=
+"../graphpite/tutorial_graphpite.howto.dataset.pkg.html">Next</a></td>
+</tr>
+
+<tr>
+<td width="33%" align="left" valign="top">Creating the Graph</td>
+<td width="34%" align="center" valign="top">How to use GraPHPite</td>
+<td width="33%" align="right" valign="top">Creating the dataset</td>
+</tr>
+</table>
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Fri, 12 Nov 2004 08:24:20 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.3.0RC3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

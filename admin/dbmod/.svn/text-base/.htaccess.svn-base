@@ -1,0 +1,23 @@
+AuthName "Resnet TechCenter"
+AuthType Basic
+AuthLDAPEnabled on
+AuthLDAPAuthoritative on
+AuthLDAPURL "ldap://129.21.3.20:ldaps/ou=people,dc=rit,dc=edu"
+AuthLDAPRemoteUserIsDN on
+Options +Indexes
+
+#require valid-user
+require user uid=jrfrcc,ou=People,dc=rit,dc=edu
+require user uid=ammrcc,ou=People,dc=rit,dc=edu 
+require user uid=dmbdss,ou=People,dc=rit,dc=edu 
+require user uid=dmshelp,ou=People,dc=rit,dc=edu
+require user uid=trdhelp,ou=People,dc=rit,dc=edu
+require user uid=mjghelp,ou=People,dc=rit,dc=edu
+require user uid=vxiacc,ou=People,dc=rit,dc=edu
+require user uid=smtacc,ou=People,dc=rit,dc=edu
+require user uid=dmcacc,ou=People,dc=rit,dc=edu
+require user uid=cmwacc,ou=People,dc=rit,dc=edu
+require user uid=dlpits,ou=People,dc=rit,dc=edu
+require user uid=pjsits,ou=People,dc=rit,dc=edu
+require user uid=sawacc,ou=People,dc=rit,dc=edu
+require user uid=hxbrcc,ou=People,dc=rit,dc=edu

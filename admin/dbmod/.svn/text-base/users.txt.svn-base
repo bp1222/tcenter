@@ -1,0 +1,21 @@
+AuthName "Resnet TechCenter"
+AuthType Basic
+AuthLDAPEnabled on
+AuthLDAPAuthoritative on
+AuthLDAPURL  "ldap://129.21.3.20:ldaps/ou=people,dc=rit,dc=edu"
+AuthLDAPRemoteUserIsDN on
+Options +Indexes
+
+# resnet employees
+require user dmbdss 
+require user dmshelp 
+require user trdhelp
+require user jrfrcc
+require user mjghelp 
+
+# desktop support staff
+require user vxiacc 
+require user smtacc 
+require user dmcacc 
+require user cmwacc 
+require user dlpits

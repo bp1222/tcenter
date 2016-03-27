@@ -1,0 +1,421 @@
+<html>
+<head>
+<title>Docs For Class Image_Graph_Dataset</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">dataset</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="../classtrees_dataset.html" class="menu">class tree: dataset</a> ]
+		  [ <a href="../elementindex_dataset.html" class="menu">index: dataset</a> ]
+		  [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_graphpite.html">graphpite</a><br />
+              <a href="../li_axis.html">axis</a><br />
+              <a href="../li_color.html">color</a><br />
+              <a href="../li_common.html">common</a><br />
+              <a href="../li_datapreprocessor.html">datapreprocessor</a><br />
+              <a href="../li_dataselector.html">dataselector</a><br />
+              <a href="../li_dataset.html">dataset</a><br />
+              <a href="../li_figure.html">figure</a><br />
+              <a href="../li_fillstyle.html">fillstyle</a><br />
+              <a href="../li_grid.html">grid</a><br />
+              <a href="../li_Image_Graph.html">Image_Graph</a><br />
+              <a href="../li_layout.html">layout</a><br />
+              <a href="../li_legend.html">legend</a><br />
+              <a href="../li_linestyle.html">linestyle</a><br />
+              <a href="../li_logo.html">logo</a><br />
+              <a href="../li_marker.html">marker</a><br />
+              <a href="../li_plotarea.html">plotarea</a><br />
+              <a href="../li_plottype.html">plottype</a><br />
+              <a href="../li_text.html">text</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../dataset/_Graph_Dataset_php.html">		Dataset.php
+		</a><br>
+			<a href="../dataset/_Graph_Dataset_Function_php.html">		Function.php
+		</a><br>
+			<a href="../dataset/_Graph_Dataset_Random_php.html">		Random.php
+		</a><br>
+			<a href="../dataset/_Graph_Dataset_Sequential_php.html">		Sequential.php
+		</a><br>
+			<a href="../dataset/_Graph_Dataset_Trivial_php.html">		Trivial.php
+		</a><br>
+			<a href="../dataset/_Graph_Dataset_VectorFunction_php.html">		VectorFunction.php
+		</a><br>
+	  </div><br />
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="../dataset/Image_Graph_Dataset.html">Image_Graph_Dataset</a><br />
+	    		<a href="../dataset/Image_Graph_Dataset_Function.html">Image_Graph_Dataset_Function</a><br />
+	    		<a href="../dataset/Image_Graph_Dataset_Random.html">Image_Graph_Dataset_Random</a><br />
+	    		<a href="../dataset/Image_Graph_Dataset_Sequential.html">Image_Graph_Dataset_Sequential</a><br />
+	    		<a href="../dataset/Image_Graph_Dataset_Trivial.html">Image_Graph_Dataset_Trivial</a><br />
+	    		<a href="../dataset/Image_Graph_Dataset_VectorFunction.html">Image_Graph_Dataset_VectorFunction</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<h1>Class: Image_Graph_Dataset</h1>
+Source Location: /Graph/Dataset.php<br /><br />
+
+
+<table width="100%" border="0">
+<tr><td valign="top">
+
+<h3><a href="#class_details">Class Overview</a></h3>
+<pre></pre><br />
+<div class="description">Data set used to represent a data collection to plot in a chart</div><br /><br />
+<h4>Author(s):</h4>
+<ul>
+        </ul>
+
+
+
+
+    
+
+
+</td>
+
+
+
+<td valign="top">
+<h3><a href="#class_methods">Methods</a></h3>
+<ul>
+    <li><a href="../dataset/Image_Graph_Dataset.html#methodImage_Graph_Dataset">Image_Graph_Dataset</a></li>
+    <li><a href="../dataset/Image_Graph_Dataset.html#methodaddPoint">addPoint</a></li>
+    <li><a href="../dataset/Image_Graph_Dataset.html#methodcount">count</a></li>
+    <li><a href="../dataset/Image_Graph_Dataset.html#methodmaximumX">maximumX</a></li>
+    <li><a href="../dataset/Image_Graph_Dataset.html#methodmaximumY">maximumY</a></li>
+    <li><a href="../dataset/Image_Graph_Dataset.html#methodminimumX">minimumX</a></li>
+    <li><a href="../dataset/Image_Graph_Dataset.html#methodminimumY">minimumY</a></li>
+    <li><a href="../dataset/Image_Graph_Dataset.html#methodsetName">setName</a></li>
+  </ul>
+</td>
+
+</tr></table>
+<hr />
+
+<table width="100%" border="0"><tr>
+
+
+<td valign="top">
+<h3>Child classes:</h3>
+<div class="tags">
+<dl>
+<dt><a href="../dataset/Image_Graph_Dataset_Function.html">Image_Graph_Dataset_Function</a></dt>
+	<dd>Function data set, points are generated by calling an external function.</dd>
+</dl>
+<dl>
+<dt><a href="../dataset/Image_Graph_Dataset_Trivial.html">Image_Graph_Dataset_Trivial</a></dt>
+	<dd>Trivial data set, simply add points (x, y) 1 by 1</dd>
+</dl>
+<dl>
+<dt><a href="../dataset/Image_Graph_Dataset_VectorFunction.html">Image_Graph_Dataset_VectorFunction</a></dt>
+	<dd>Vector Function data set, points are generated by calling 2 external functions, x = sin(t) and y = cos(t)</dd>
+</dl>
+</div>
+</td>
+
+
+
+
+</tr></table>
+<hr />
+
+<a name="class_details"></a>
+<h3>Class Details</h3>
+<div class="tags">
+[line 38]<br />
+Data set used to represent a data collection to plot in a chart<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>abstract:</b>&nbsp;&nbsp;</td><td></td>
+  </tr>
+</table>
+</div>
+</div><br /><br />
+<div class="top">[ <a href="#top">Top</a> ]</div><br />
+
+
+<hr />
+<a name="class_methods"></a>
+<h3>Class Methods</h3>
+<div class="tags">
+  <hr />
+	<a name="methodImage_Graph_Dataset"></a>
+	<h3>constructor Image_Graph_Dataset <span class="smalllinenumber">[line 93]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>Image_Graph_Dataset &amp;Image_Graph_Dataset(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Image_Graph_Dataset [Constructor]<br /><br /><br /><br />
+
+
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodaddPoint"></a>
+	<h3>method addPoint <span class="smalllinenumber">[line 112]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void addPoint(
+int
+$x, [int
+$y = false], [var
+$ID = false])</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Add a point to the dataset<br /><br /><br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../dataset/Image_Graph_Dataset_Function.html#methodaddPoint">Image_Graph_Dataset_Function::addPoint()</a></dt>
+		<dd>Add a point to the dataset.</dd>
+	</dl>
+		<dl>
+	<dt><a href="../dataset/Image_Graph_Dataset_Trivial.html#methodaddPoint">Image_Graph_Dataset_Trivial::addPoint()</a></dt>
+		<dd>Add a point to the dataset</dd>
+	</dl>
+		<dl>
+	<dt><a href="../dataset/Image_Graph_Dataset_Sequential.html#methodaddPoint">Image_Graph_Dataset_Sequential::addPoint()</a></dt>
+		<dd>Add a point to the dataset</dd>
+	</dl>
+		<dl>
+	<dt><a href="../dataset/Image_Graph_Dataset_VectorFunction.html#methodaddPoint">Image_Graph_Dataset_VectorFunction::addPoint()</a></dt>
+		<dd>Add a point to the dataset</dd>
+	</dl>
+	</p>
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$x</b>&nbsp;&nbsp;</td>
+        <td>The X value to add</td>
+      </tr>
+          <tr>
+        <td class="type">int&nbsp;&nbsp;</td>
+        <td><b>$y</b>&nbsp;&nbsp;</td>
+        <td>The Y value to add, can be omited</td>
+      </tr>
+          <tr>
+        <td class="type">var&nbsp;&nbsp;</td>
+        <td><b>$ID</b>&nbsp;&nbsp;</td>
+        <td>The ID of the point</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodcount"></a>
+	<h3>method count <span class="smalllinenumber">[line 133]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>int count(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		The number of values in the dataset<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The number of values in the dataset</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../dataset/Image_Graph_Dataset_Trivial.html#methodcount">Image_Graph_Dataset_Trivial::count()</a></dt>
+		<dd>The number of values in the dataset</dd>
+	</dl>
+	</p>
+
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodmaximumX"></a>
+	<h3>method maximumX <span class="smalllinenumber">[line 184]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>var maximumX(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		The maximum X value<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The maximum X value</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../dataset/Image_Graph_Dataset_Sequential.html#methodmaximumX">Image_Graph_Dataset_Sequential::maximumX()</a></dt>
+		<dd>The maximum X value</dd>
+	</dl>
+	</p>
+
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodmaximumY"></a>
+	<h3>method maximumY <span class="smalllinenumber">[line 202]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>var maximumY(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		The maximum Y value<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The maximum Y value</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodminimumX"></a>
+	<h3>method minimumX <span class="smalllinenumber">[line 175]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>var minimumX(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		The minimum X value<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The minimum X value</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+	<p>Overridden in child classes as:<br />
+		<dl>
+	<dt><a href="../dataset/Image_Graph_Dataset_Sequential.html#methodminimumX">Image_Graph_Dataset_Sequential::minimumX()</a></dt>
+		<dd>The minimum X value</dd>
+	</dl>
+	</p>
+
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodminimumY"></a>
+	<h3>method minimumY <span class="smalllinenumber">[line 193]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>var minimumY(
+)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		The minimum Y value<br /><br /><br /><br />
+<h4>Tags:</h4>
+<div class="tags">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><b>return:</b>&nbsp;&nbsp;</td><td>The minimum Y value</td>
+  </tr>
+</table>
+</div>
+<br /><br />
+
+
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+  <hr />
+	<a name="methodsetName"></a>
+	<h3>method setName <span class="smalllinenumber">[line 101]</span></h3>
+	<div class="function">
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void setName(
+string
+$name)</code>
+    </td></tr></table>
+    </td></tr></table><br />
+	
+		Sets the name of the data set, used for legending<br /><br /><br /><br />
+
+
+        <h4>Parameters:</h4>
+    <div class="tags">
+    <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+        <td class="type">string&nbsp;&nbsp;</td>
+        <td><b>$name</b>&nbsp;&nbsp;</td>
+        <td>The name of the dataset</td>
+      </tr>
+        </table>
+    </div><br />
+        <div class="top">[ <a href="#top">Top</a> ]</div>
+  </div>
+</div><br />
+
+
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Fri, 12 Nov 2004 08:25:14 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.3.0RC3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

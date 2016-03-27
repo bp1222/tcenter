@@ -1,0 +1,83 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3 to server version: 3.23.28-gamma-debug
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer
+
+mysql> 
+mysql> use inventory
+Database changed
+mysql> show tables
+    -> ;
++---------------------+
+| Tables_in_inventory |
++---------------------+
+| computers           |
+| hardware            |
+| os                  |
+| software            |
++---------------------+
+4 rows in set (0.16 sec)
+
+mysql> show fields from computers;
++-------------+-------------+------+-----+---------+----------------+---------------------------------+
+| Field       | Type        | Null | Key | Default | Extra          | Privileges                      |
++-------------+-------------+------+-----+---------+----------------+---------------------------------+
+| computer_id | int(11)     |      | PRI | NULL    | auto_increment | select,insert,update,references |
+| name        | varchar(60) |      |     |         |                | select,insert,update,references |
+| ipaddress   | varchar(15) |      |     |         |                | select,insert,update,references |
+| hardware    | text        |      |     |         |                | select,insert,update,references |
+| software    | text        |      |     |         |                | select,insert,update,references |
+| os          | varchar(60) | YES  |     | NULL    |                | select,insert,update,references |
+| other       | text        | YES  |     | NULL    |                | select,insert,update,references |
++-------------+-------------+------+-----+---------+----------------+---------------------------------+
+7 rows in set (0.16 sec)
+
+mysql> show fields from software;
++--------------+-------------+------+-----+---------+----------------+---------------------------------+
+| Field        | Type        | Null | Key | Default | Extra          | Privileges                      |
++--------------+-------------+------+-----+---------+----------------+---------------------------------+
+| software_id  | int(11)     |      | PRI | NULL    | auto_increment | select,insert,update,references |
+| name         | varchar(60) |      |     |         |                | select,insert,update,references |
+| manufacturer | varchar(60) |      |     |         |                | select,insert,update,references |
+| version      | varchar(5)  |      |     |         |                | select,insert,update,references |
+| other        | text        | YES  |     | NULL    |                | select,insert,update,references |
++--------------+-------------+------+-----+---------+----------------+---------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> show fields from computers;
++-------------+-------------+------+-----+---------+----------------+---------------------------------+
+| Field       | Type        | Null | Key | Default | Extra          | Privileges                      |
++-------------+-------------+------+-----+---------+----------------+---------------------------------+
+| computer_id | int(11)     |      | PRI | NULL    | auto_increment | select,insert,update,references |
+| name        | varchar(60) |      |     |         |                | select,insert,update,references |
+| ipaddress   | varchar(15) |      |     |         |                | select,insert,update,references |
+| hardware    | text        |      |     |         |                | select,insert,update,references |
+| software    | text        |      |     |         |                | select,insert,update,references |
+| os          | varchar(60) | YES  |     | NULL    |                | select,insert,update,references |
+| other       | text        | YES  |     | NULL    |                | select,insert,update,references |
++-------------+-------------+------+-----+---------+----------------+---------------------------------+
+7 rows in set (0.00 sec)
+
+mysql> show fields from hardware;
++--------------+--------------+------+-----+---------+----------------+---------------------------------+
+| Field        | Type         | Null | Key | Default | Extra          | Privileges                      |
++--------------+--------------+------+-----+---------+----------------+---------------------------------+
+| hardware_id  | int(11)      |      | PRI | NULL    | auto_increment | select,insert,update,references |
+| type         | varchar(255) |      |     |         |                | select,insert,update,references |
+| model        | varchar(60)  |      |     |         |                | select,insert,update,references |
+| make         | varchar(60)  |      |     |         |                | select,insert,update,references |
+| manufacturer | varchar(60)  |      |     |         |                | select,insert,update,references |
+| other        | text         | YES  |     | NULL    |                | select,insert,update,references |
++--------------+--------------+------+-----+---------+----------------+---------------------------------+
+6 rows in set (0.05 sec)
+
+mysql> show fields from os;
++-------+-------------+------+-----+---------+----------------+---------------------------------+
+| Field | Type        | Null | Key | Default | Extra          | Privileges                      |
++-------+-------------+------+-----+---------+----------------+---------------------------------+
+| os_id | int(11)     |      | PRI | NULL    | auto_increment | select,insert,update,references |
+| name  | varchar(60) | YES  |     | NULL    |                | select,insert,update,references |
++-------+-------------+------+-----+---------+----------------+---------------------------------+
+2 rows in set (0.05 sec)
+
+mysql> exit

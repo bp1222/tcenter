@@ -1,0 +1,53 @@
+8
+
+dir
+32
+file:///home/dave/projects/tcenter1/trunk/www/admin/report/inc
+file:///home/dave/projects
+
+
+
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+fa5c2e99-6609-419c-b0b2-6f39b90b64f9
+
+connection.inc
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+f968074d46d23d7576324b085066e587
+2008-09-17T15:56:12.993033Z
+32
+dave
+has-props
+
+header.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+ba575e59b831c65da133c4a35bdd3de1
+2008-09-17T15:56:12.993033Z
+32
+dave
+

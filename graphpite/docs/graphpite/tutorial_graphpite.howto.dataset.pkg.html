@@ -1,0 +1,196 @@
+<html>
+<head>
+<title>Creating the dataset</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">graphpite</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="../classtrees_graphpite.html" class="menu">class tree: graphpite</a> ]
+		  [ <a href="../elementindex_graphpite.html" class="menu">index: graphpite</a> ]
+		  [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_graphpite.html">graphpite</a><br />
+              <a href="../li_axis.html">axis</a><br />
+              <a href="../li_color.html">color</a><br />
+              <a href="../li_common.html">common</a><br />
+              <a href="../li_datapreprocessor.html">datapreprocessor</a><br />
+              <a href="../li_dataselector.html">dataselector</a><br />
+              <a href="../li_dataset.html">dataset</a><br />
+              <a href="../li_figure.html">figure</a><br />
+              <a href="../li_fillstyle.html">fillstyle</a><br />
+              <a href="../li_text.html">text</a><br />
+              <a href="../li_grid.html">grid</a><br />
+              <a href="../li_layout.html">layout</a><br />
+              <a href="../li_legend.html">legend</a><br />
+              <a href="../li_linestyle.html">linestyle</a><br />
+              <a href="../li_logo.html">logo</a><br />
+              <a href="../li_marker.html">marker</a><br />
+              <a href="../li_Image_Graph.html">Image_Graph</a><br />
+              <a href="../li_plottype.html">plottype</a><br />
+              <a href="../li_plotarea.html">plotarea</a><br />
+            <br /><br />
+		<b>Tutorials/Manuals:</b><br />
+					<strong>Package-level:</strong>
+							<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.pkg.html">How to use GraPHPite</a>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.graphp.pkg.html">Creating the Graph</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.plotarea.pkg.html">Adding a plotarea</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.dataset.pkg.html">Creating the dataset</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.plottype.pkg.html">Adding plots</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.modify.pkg.html">Modifying appearance</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.layout.pkg.html">Plot Layout</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.legend.pkg.html">Using Legends</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.example.pkg.html">Graph example</a>
+</ul>
+</li></ul>
+
+							<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.pkg.html">GraPHPite</a>
+</ul>
+
+									                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../graphpite/_Graph_Config_php.html">		Config.php
+		</a><br>
+			<a href="../graphpite/_Graph_php.html">		Graph.php
+		</a><br>
+	  </div><br />
+      
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="10%" align="left" valign="bottom"><a href=
+"../graphpite/tutorial_graphpite.howto.plotarea.pkg.html">Prev</a></td>
+<td width="80%" align="center" valign="bottom"></td>
+<td width="10%" align="right" valign="bottom"><a href=
+"../graphpite/tutorial_graphpite.howto.plottype.pkg.html">Next</a></td>
+</tr>
+</table>
+<div><a name=""></a><div class="ref-title-box">Creating the dataset<h1 class="ref-title">Creating the dataset</h1>
+		<h2 class="ref-purpose">The GraPHPite Tutorial</h2></div>
+	<div class="ref-synopsis"><span class="author">Nosey
+			<div class="author-blurb"><a href="http://graphpite.sourceforge.net">GraPHPite on SourceForge</a></div></span></div>
+	<span><a name="intro"></a><h2 class="title">Creating the dataset</h2><p>After creating (or before) the PlotArea and GraPHP, but before (or in the same
+			&quot;command) you create the specific plot, you need to specify the data to use. This is done using
+			the dataset	classes. How to use the datasets depends on the specific type of set. They
+			are all demonstrated below, starting with the most simple.</p>
+		<a name="intro.trivialdata"></a><h3 class="title">Trivial Dataset</h3><p>The TrivialDataSet is basically an array which hold (X, Y) data pairs. All data are added
+				sequentially using DataSet::addPoint(). See the example below:</p>
+			<div class="listing"><pre><ol><li><span class="src-var">$DataSet </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">TrivialDataSet</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;    </span><span class="src-comm">// create the dataset</span></li>
+<li><span class="src-var">$DataSet</span><span class="src-sym">-&gt;</span><span class="src-id">addPoint</span><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">10</span><span class="src-sym">)</span><span class="src-sym">;            </span><span class="src-comm">// add point (0, 10)</span></li>
+<li><span class="src-var">$DataSet</span><span class="src-sym">-&gt;</span><span class="src-id">addPoint</span><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">, </span><span class="src-num">17</span><span class="src-sym">)</span><span class="src-sym">;            </span><span class="src-comm">// add point (1, 17)</span></li>
+<li><span class="src-var">$DataSet</span><span class="src-sym">-&gt;</span><span class="src-id">addPoint</span><span class="src-sym">(</span><span class="src-str">&quot;Dog&quot;</span><span class="src-sym">, </span><a href="http://www.php.net/pi">pi</a><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;    </span><span class="src-comm">// add point (Dog, 3.14159...)</span></li>
+<li>...</li>
+</ol></pre></div><hr />
+		<a name="intro.randomdata"></a><h3 class="title">Random Dataset</h3><p>Another dataset is one used especially for demonstrational purposes, sinces it provide no
+				real information, the RandomDataSet. Data points (X, Y) are X as 
+				sequential and Y as a random value.</p>
+			<div class="listing"><pre><ol><li><span class="src-var">$DataSet </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">RandomDataSet</span><span class="src-sym">(</span><span class="src-num">100</span><span class="src-sym">, </span><span class="src-num">10</span><span class="src-sym">, </span><span class="src-num">200</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>        <span class="src-comm">// generate a random 100 points between 10 and 200</span></li>
+<li>...</li>
+</ol></pre></div><hr />
+		<a name="intro.functiondata"></a><h3 class="title">Function Dataset</h3><p>It is (often) very usefull to visualize a mathematical function on a graph. To do this
+				the FunctionDataSet is provided. The data points (X, Y) are
+				evaluated as X is sequential and Y is the function applied to the X value, ie Y = f(X).
+				The function needs to be a single parameter function and return a single primitive value,
+				like for instance sin, cos, etc.</p>
+			<p>The dataset below is an example of how to use a standard function.</p>
+			<div class="listing"><pre><ol><li><span class="src-var">$DataSet </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">FunctionDataSet</span><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">20</span><span class="src-sym">, </span><span class="src-str">&quot;sin&quot;</span><span class="src-sym">, </span><span class="src-num">100</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>        <span class="src-comm">// generate a 100 points on the sine curve between 0 and 20</span></li>
+<li>...</li>
+</ol></pre></div>		
+			<p>The dataset below is an example of how to use a user function.</p>
+			<div class="listing"><pre><ol><li><span class="src-key">function </span><span class="src-id">aFunc</span><span class="src-sym">(</span><span class="src-var">$X</span><span class="src-sym">) </span><span class="src-sym">{</span></li>
+<li>    <span class="src-key">return </span><a href="http://www.php.net/sin">sin</a><span class="src-sym">(</span><span class="src-var">$X</span><span class="src-sym">)</span>+<a href="http://www.php.net/cos">cos</a><span class="src-sym">(</span><span class="src-var">$X</span><span class="src-sym">)</span>*<span class="src-var">$X</span><span class="src-sym">;</span></li>
+<li><span class="src-sym">}</span></li>
+<li>            </li>
+<li><span class="src-var">$DataSet </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">FunctionDataSet</span><span class="src-sym">(</span>-<span class="src-num">10</span><span class="src-sym">, </span><span class="src-num">10</span><span class="src-sym">, </span><span class="src-str">&quot;aFunc&quot;</span><span class="src-sym">, </span><span class="src-num">100</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>        <span class="src-comm">// generate a 100 points using the aFunc function between -10 and 10</span></li>
+<li>...</li>
+</ol></pre></div>		
+			<p>The dataset below is demonstrates the same as the above but using create_function().</p>
+			<div class="listing"><pre><ol><li><span class="src-var">$DataSet </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">FunctionDataSet</span><span class="src-sym">(</span>-<span class="src-num">10</span><span class="src-sym">, </span><span class="src-num">10</span><span class="src-sym">, </span></li>
+<li>            <a href="http://www.php.net/create_function">create_function</a><span class="src-sym">(</span><span class="src-str">'$X'</span><span class="src-sym">, </span><span class="src-str">'return sin($X)+cos($X)*$X;'</span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-num">100</span><span class="src-sym">)</span><span class="src-sym">;    </span></li>
+<li>        <span class="src-comm">// generate a 100 points using the aFunc function between -10 and 10</span></li>
+<li>...</li>
+</ol></pre></div><hr />
+		<a name="intro.vectorfunctiondata"></a><h3 class="title">Vector Function Dataset</h3><p>The VectorFunctionDataSet is in many ways the same as
+				the FunctionDataSet. The main (and basically the only) difference
+				is that the (X, Y) data is calculated as (fx($T), fy($T)) instead of ($X, f($X)).</p>
+			<p>The dataset below is an example of how to use a vector function.</p>
+			<div class="listing"><pre><ol><li><span class="src-var">$DataSet </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">VectorFunctionDataSet</span><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">2</span>*<a href="http://www.php.net/pi">pi</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">, </span><span class="src-str">&quot;cos&quot;</span><span class="src-sym">, </span><span class="src-str">&quot;sin&quot;</span><span class="src-sym">, </span><span class="src-num">100</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>        <span class="src-comm">// generate a 100 points on the (cos, sin) curve between 0 and 2*pi</span></li>
+<li><span class="src-comm">// this will produce a perfect circle</span></li>
+<li>&nbsp;</li>
+<li>...</li>
+</ol></pre></div>
+			<p>The dataset below is an example of how to use a vector function with 2 user functions.</p>
+			<div class="listing"><pre><ol><li><span class="src-key">function </span><span class="src-id">tcost</span><span class="src-sym">(</span><span class="src-var">$t</span><span class="src-sym">) </span><span class="src-sym">{ </span><span class="src-key">return </span><span class="src-var">$t</span>*<a href="http://www.php.net/cos">cos</a><span class="src-sym">(</span><span class="src-var">$t</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-sym">}            </span></li>
+<li><span class="src-key">function </span><span class="src-id">tsint</span><span class="src-sym">(</span><span class="src-var">$t</span><span class="src-sym">) </span><span class="src-sym">{ </span><span class="src-key">return </span><span class="src-var">$t</span>*<a href="http://www.php.net/sin">sin</a><span class="src-sym">(</span><span class="src-var">$t</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-sym">}            </span></li>
+<li><span class="src-var">$DataSet </span>=<span class="src-sym">&amp; </span><span class="src-key">new </span><span class="src-id">VectorFunctionDataSet</span><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">, </span><span class="src-num">20</span><span class="src-sym">, </span><span class="src-str">&quot;tcost&quot;</span><span class="src-sym">, </span><span class="src-str">&quot;tsint&quot;</span><span class="src-sym">, </span><span class="src-num">100</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>        <span class="src-comm">// generate a 100 points on the (cos, sin) curve between 0 and 20</span></li>
+<li><span class="src-comm">// this will produce a spiral with center in (0, 0)</span></li>
+<li>&nbsp;</li>
+<li>...</li>
+</ol></pre></div>
+			<p>Similarly to the function dataset it's possible to use the create_function() to specify
+				the function-parameters to use.</p><hr /></span></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="33%" align="left" valign="top"><a href="../graphpite/tutorial_graphpite.howto.plotarea.pkg.html">Prev</a></td>
+<td width="34%" align="center" valign="top"><a href=
+"../graphpite/tutorial_graphpite.howto.pkg.html">Up</a></td>
+<td width="33%" align="right" valign="top"><a href=
+"../graphpite/tutorial_graphpite.howto.plottype.pkg.html">Next</a></td>
+</tr>
+
+<tr>
+<td width="33%" align="left" valign="top">Adding a plotarea</td>
+<td width="34%" align="center" valign="top">How to use GraPHPite</td>
+<td width="33%" align="right" valign="top">Adding plots</td>
+</tr>
+</table>
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Fri, 12 Nov 2004 08:24:23 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.3.0RC3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

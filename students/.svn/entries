@@ -1,0 +1,133 @@
+8
+
+dir
+32
+file:///home/dave/projects/tcenter1/trunk/www/students
+file:///home/dave/projects
+
+
+
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+fa5c2e99-6609-419c-b0b2-6f39b90b64f9
+
+editmachines.php
+file
+
+
+
+
+2008-09-17T16:53:11.000000Z
+232ced80692f1795df25ceaef538c1f2
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+waiver.php
+file
+
+
+
+
+2008-09-17T16:53:11.000000Z
+ec996d3c6b4ec84e35757c7877b330e6
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+images
+dir
+
+checkmyrequests.php
+file
+
+
+
+
+2008-09-17T16:53:11.000000Z
+8c8dea233de5b79060d521f471be1086
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+requesthelp.php
+file
+
+
+
+
+2008-09-17T16:53:11.000000Z
+9dd4a47b0f7752109f36955a3791d781
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+inc
+dir
+
+decline.php
+file
+
+
+
+
+2008-09-17T16:53:11.000000Z
+59dff5ebfdc1179e1ee349ce40f6c9f1
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+.htaccess
+file
+
+
+
+
+2008-09-17T16:53:11.000000Z
+d1c149fbd2c35b510ad7f8859b816c4e
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+stylesheets
+dir
+
+index.php
+file
+
+
+
+
+2008-09-17T16:53:11.000000Z
+36d8d6800dd853ed57a1042c72c172eb
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+request.php
+file
+
+
+
+
+2008-09-17T16:53:11.000000Z
+c3da674701ce4b17a42a56962b411d23
+2008-09-17T15:56:12.993033Z
+32
+dave
+

@@ -1,0 +1,128 @@
+<html>
+<head>
+<title>GraPHPite Documentation</title>
+<link rel="stylesheet" type="text/css" href="media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">marker</td>
+  </tr>
+  <tr><td class="header_line"><img src="media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="classtrees_marker.html" class="menu">class tree: marker</a> ]
+		  [ <a href="elementindex_marker.html" class="menu">index: marker</a> ]
+		  [ <a href="elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="li_graphpite.html">graphpite</a><br />
+              <a href="li_axis.html">axis</a><br />
+              <a href="li_color.html">color</a><br />
+              <a href="li_common.html">common</a><br />
+              <a href="li_datapreprocessor.html">datapreprocessor</a><br />
+              <a href="li_dataselector.html">dataselector</a><br />
+              <a href="li_dataset.html">dataset</a><br />
+              <a href="li_figure.html">figure</a><br />
+              <a href="li_fillstyle.html">fillstyle</a><br />
+              <a href="li_grid.html">grid</a><br />
+              <a href="li_Image_Graph.html">Image_Graph</a><br />
+              <a href="li_layout.html">layout</a><br />
+              <a href="li_legend.html">legend</a><br />
+              <a href="li_linestyle.html">linestyle</a><br />
+              <a href="li_logo.html">logo</a><br />
+              <a href="li_marker.html">marker</a><br />
+              <a href="li_plotarea.html">plotarea</a><br />
+              <a href="li_plottype.html">plottype</a><br />
+              <a href="li_text.html">text</a><br />
+            <br /><br />
+                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="marker/_Graph_Marker_Pointing_Angular_php.html">		Angular.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Array_php.html">		Array.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Asterisk_php.html">		Asterisk.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Average_php.html">		Average.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Box_php.html">		Box.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Circle_php.html">		Circle.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Constants_php.html">		Constants.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Cross_php.html">		Cross.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Diamond_php.html">		Diamond.php
+		</a><br>
+			<a href="marker/_Graph_Marker_FloodFill_php.html">		FloodFill.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Icon_php.html">		Icon.php
+		</a><br>
+			<a href="marker/_Graph_Marker_php.html">		Marker.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Pinpoint_php.html">		Pinpoint.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Plus_php.html">		Plus.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Pointing_php.html">		Pointing.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Pointing_Radial_php.html">		Radial.php
+		</a><br>
+			<a href="marker/_Graph_Marker_ReversePinpoint_php.html">		ReversePinpoint.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Triangle_php.html">		Triangle.php
+		</a><br>
+			<a href="marker/_Graph_Marker_Value_php.html">		Value.php
+		</a><br>
+	  </div><br />
+      
+            <b>Classes:</b><br />
+        <div class="package">
+		    		<a href="marker/Image_Graph_Marker.html">Image_Graph_Marker</a><br />
+	    		<a href="marker/Image_Graph_Marker_Array.html">Image_Graph_Marker_Array</a><br />
+	    		<a href="marker/Image_Graph_Marker_Asterisk.html">Image_Graph_Marker_Asterisk</a><br />
+	    		<a href="marker/Image_Graph_Marker_Average.html">Image_Graph_Marker_Average</a><br />
+	    		<a href="marker/Image_Graph_Marker_Box.html">Image_Graph_Marker_Box</a><br />
+	    		<a href="marker/Image_Graph_Marker_Circle.html">Image_Graph_Marker_Circle</a><br />
+	    		<a href="marker/Image_Graph_Marker_Cross.html">Image_Graph_Marker_Cross</a><br />
+	    		<a href="marker/Image_Graph_Marker_Diamond.html">Image_Graph_Marker_Diamond</a><br />
+	    		<a href="marker/Image_Graph_Marker_FloodFill.html">Image_Graph_Marker_FloodFill</a><br />
+	    		<a href="marker/Image_Graph_Marker_Icon.html">Image_Graph_Marker_Icon</a><br />
+	    		<a href="marker/Image_Graph_Marker_Pinpoint.html">Image_Graph_Marker_Pinpoint</a><br />
+	    		<a href="marker/Image_Graph_Marker_Plus.html">Image_Graph_Marker_Plus</a><br />
+	    		<a href="marker/Image_Graph_Marker_Pointing.html">Image_Graph_Marker_Pointing</a><br />
+	    		<a href="marker/Image_Graph_Marker_Pointing_Angular.html">Image_Graph_Marker_Pointing_Angular</a><br />
+	    		<a href="marker/Image_Graph_Marker_Pointing_Radial.html">Image_Graph_Marker_Pointing_Radial</a><br />
+	    		<a href="marker/Image_Graph_Marker_ReversePinpoint.html">Image_Graph_Marker_ReversePinpoint</a><br />
+	    		<a href="marker/Image_Graph_Marker_Triangle.html">Image_Graph_Marker_Triangle</a><br />
+	    		<a href="marker/Image_Graph_Marker_Value.html">Image_Graph_Marker_Value</a><br />
+	  </div>
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<div align="center"><h1>GraPHPite Documentation</h1></div>
+<b>Welcome to marker!</b><br />
+<br />
+This documentation was generated by <a href="http://www.phpdoc.org">phpDocumentor v1.3.0RC3</a><br />
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Fri, 12 Nov 2004 08:24:56 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.3.0RC3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

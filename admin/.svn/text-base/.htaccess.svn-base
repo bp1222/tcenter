@@ -1,0 +1,33 @@
+AuthName "Resnet TechCenter"
+AuthType Basic
+AuthLDAPEnabled on
+AuthLDAPAuthoritative on
+#AuthLDAPURL "ldap://129.21.3.20:ldaps/ou=people,dc=rit,dc=edu"
+AuthLDAPURL "ldap://ldap.rit.edu:ldaps/ou=people,dc=rit,dc=edu"
+AuthLDAPRemoteUserIsDN on
+Options +Indexes
+
+#require valid-user
+require user uid=ammrcc,ou=People,dc=rit,dc=edu 
+require user uid=epdrcc,ou=People,dc=rit,dc=edu
+require user uid=bmsrcc,ou=People,dc=rit,dc=edu
+require user uid=trdhelp,ou=People,dc=rit,dc=edu
+require user uid=kafrcc,ou=People,dc=rit,dc=edu
+require user uid=srjrcc,ou=People,dc=rit,dc=edu
+require user uid=mrtrcc,ou=People,dc=rit,dc=edu
+require user uid=tjtrcc,ou=People,dc=rit,dc=edu
+require user uid=stlrcc,ou=People,dc=rit,dc=edu
+require user uid=dmsrcc,ou=People,dc=rit,dc=edu
+require user uid=rllrcc,ou=People,dc=rit,dc=edu
+require user uid=jplrcc,ou=People,dc=rit,dc=edu
+require user uid=jdwrcc,ou=People,dc=rit,dc=edu
+require user uid=mcbrcc,ou=People,dc=rit,dc=edu
+require user uid=kalrcc,ou=People,dc=rit,dc=edu
+require user uid=jpprcc,ou=People,dc=rit,dc=edu
+require user uid=jpwrcc,ou=People,dc=rit,dc=edu
+require user uid=ajfrcc,ou=People,dc=rit,dc=edu
+
+# desktop support staff
+require user uid=vxiacc,ou=People,dc=rit,dc=edu
+require user uid=smtacc,ou=People,dc=rit,dc=edu
+require user uid=dlpits,ou=People,dc=rit,dc=edu

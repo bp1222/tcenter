@@ -1,0 +1,31 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:527: checking for gcc
+configure:604: checking whether the C compiler (gcc  ) works
+configure:618: gcc -o conftest    conftest.c  1>&5
+configure:638: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:643: checking whether we are using GNU C
+configure:652: gcc -E conftest.c
+configure:667: checking whether gcc accepts -g
+configure:697: checking for ranlib
+configure:753: checking for a BSD compatible install
+configure:809: checking how to run the C preprocessor
+configure:830: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:871: checking for getopt.h
+configure:881: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:905: checking for paper.h
+configure:915: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:911:19: paper.h: No such file or directory
+configure: failed program was:
+#line 910 "configure"
+#include "confdefs.h"
+#include <paper.h>
+configure:941: checking for unistd.h
+configure:951: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:979: checking for strerror
+configure:1007: gcc -o conftest -g -O2 -Wall   conftest.c  1>&5
+configure:1030: checking for strcasecmp
+configure:1058: gcc -o conftest -g -O2 -Wall   conftest.c  1>&5
+configure:1084: checking for gmake
+configure:1095: checking if makeinfo can output html

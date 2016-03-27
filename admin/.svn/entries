@@ -1,0 +1,268 @@
+8
+
+dir
+32
+file:///home/dave/projects/tcenter1/trunk/www/admin
+file:///home/dave/projects
+
+
+
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+fa5c2e99-6609-419c-b0b2-6f39b90b64f9
+
+test
+dir
+
+querymachine.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+bc45d48bb896b0f39c403e445877ed70
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+generate.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+bb10f8466b1d5c033935a2ff73101b91
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+receipt.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+64502360c3f84cd36bb6d569b94012f2
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+editmachines.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+b42005123e9f67a77b381791533ffb29
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+inventory.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+7461d551b8b73a90248b61668325011c
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+dbmod
+dir
+
+new
+dir
+
+queryuser.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+81f6b2c6d9630f4e1ebab4cebfdd9498
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+tickets.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+d5bb31d47a08319df4d22d6f7e9ad4ea
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+inventory
+dir
+
+index.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+0149adceb7c67290db8aae29cbfa3f07
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+editusers.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+acebfac348be30cd5cf5177b6e977420
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+stats
+dir
+
+queryticket.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+28fc9ca80ce2634d964f39154fc86e4c
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+changewait.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+ca79ea8bff61c9fcb9c49852e408c88e
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+addticketnum.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+1bc536eb28a4c8086d6d4c2e7020aadc
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+images
+dir
+
+inc
+dir
+
+index-OLD.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+ebf8089a6b89530806934b4c4509c181
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+pending.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+97eb390fe5c2e13ab9eb31eb5b878f08
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+report
+dir
+
+.htaccess
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+507c9ea452ffbcce195c930aad8024d3
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+experience.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+2304d64608ebcca94081674b695978d1
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+changewait.php.OLD
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+fca5cbd1c49df4fe914b8a90ef2cb8ce
+2008-09-17T15:56:12.993033Z
+32
+dave
+
+request.php
+file
+
+
+
+
+2008-09-17T16:53:08.000000Z
+d59ce56fdf12c8e4975c376e62cbedd2
+2008-09-17T15:56:12.993033Z
+32
+dave
+

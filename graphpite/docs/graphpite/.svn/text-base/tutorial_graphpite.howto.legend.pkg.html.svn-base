@@ -1,0 +1,184 @@
+<html>
+<head>
+<title>Using Legends</title>
+<link rel="stylesheet" type="text/css" href="../media/style.css">
+</head>
+<body>
+
+<table border="0" cellspacing="0" cellpadding="0" height="48" width="100%">
+  <tr>
+    <td class="header_top">graphpite</td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+  <tr>
+    <td class="header_menu">
+  		  [ <a href="../classtrees_graphpite.html" class="menu">class tree: graphpite</a> ]
+		  [ <a href="../elementindex_graphpite.html" class="menu">index: graphpite</a> ]
+		  [ <a href="../elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+  <tr><td class="header_line"><img src="../media/empty.png" width="1" height="1" border="0" alt=""  /></td></tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="200" class="menu">
+      <b>Packages:</b><br />
+              <a href="../li_graphpite.html">graphpite</a><br />
+              <a href="../li_axis.html">axis</a><br />
+              <a href="../li_color.html">color</a><br />
+              <a href="../li_common.html">common</a><br />
+              <a href="../li_datapreprocessor.html">datapreprocessor</a><br />
+              <a href="../li_dataselector.html">dataselector</a><br />
+              <a href="../li_dataset.html">dataset</a><br />
+              <a href="../li_figure.html">figure</a><br />
+              <a href="../li_fillstyle.html">fillstyle</a><br />
+              <a href="../li_text.html">text</a><br />
+              <a href="../li_grid.html">grid</a><br />
+              <a href="../li_layout.html">layout</a><br />
+              <a href="../li_legend.html">legend</a><br />
+              <a href="../li_linestyle.html">linestyle</a><br />
+              <a href="../li_logo.html">logo</a><br />
+              <a href="../li_marker.html">marker</a><br />
+              <a href="../li_Image_Graph.html">Image_Graph</a><br />
+              <a href="../li_plottype.html">plottype</a><br />
+              <a href="../li_plotarea.html">plotarea</a><br />
+            <br /><br />
+		<b>Tutorials/Manuals:</b><br />
+					<strong>Package-level:</strong>
+							<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.pkg.html">How to use GraPHPite</a>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.graphp.pkg.html">Creating the Graph</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.plotarea.pkg.html">Adding a plotarea</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.dataset.pkg.html">Creating the dataset</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.plottype.pkg.html">Adding plots</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.modify.pkg.html">Modifying appearance</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.layout.pkg.html">Plot Layout</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.legend.pkg.html">Using Legends</a>
+</ul>
+<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.howto.example.pkg.html">Graph example</a>
+</ul>
+</li></ul>
+
+							<ul>
+	<li type="square"><a href="../graphpite/tutorial_graphpite.pkg.html">GraPHPite</a>
+</ul>
+
+									                        <b>Files:</b><br />
+      	  <div class="package">
+			<a href="../graphpite/_Graph_Config_php.html">		Config.php
+		</a><br>
+			<a href="../graphpite/_Graph_php.html">		Graph.php
+		</a><br>
+	  </div><br />
+      
+                </td>
+    <td>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="10%" align="left" valign="bottom"><a href=
+"../graphpite/tutorial_graphpite.howto.layout.pkg.html">Prev</a></td>
+<td width="80%" align="center" valign="bottom"></td>
+<td width="10%" align="right" valign="bottom"><a href=
+"../graphpite/tutorial_graphpite.howto.example.pkg.html">Next</a></td>
+</tr>
+</table>
+<div><a name=""></a><div class="ref-title-box">Using Legends<h1 class="ref-title">Using Legends</h1>
+		<h2 class="ref-purpose">The GraPHPite Tutorial</h2></div>
+	<div class="ref-synopsis"><span class="author">Nosey
+			<div class="author-blurb"><a href="http://graphpite.sourceforge.net">GraPHPite on SourceForge</a></div></span></div>
+	<span><a name="intro"></a><h2 class="title">Using Legends</h2><p>There are 2 main ways to display legends using GraPHPite.
+			<ul><li><p>As a box, overlayed on the plotarea</p></li>
+				<li><p>As a box, displayed somewhere besides/above/below the plotarea</p></li></ul></p>
+		<a name="intro.legend1"></a><h3 class="title">Overlayed Legends</h3><p>The 1st way will display a box that is placed (by default in the upper-right corner) of the plotarea. This is the
+				easiest way to add the legend:</p>
+			<div class="listing"><pre><ol><li>...</li>
+<li><span class="src-var">$PlotArea</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-key">new </span><span class="src-id">Legend</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+<li>...</li>
+</ol></pre></div>
+			<p>Note that a Legend is added to a PlotArea.</p>	
+			<p>By displaying the legend in the upper-right corner it could overlap your plot hiding information. However you have 
+				the possibility to display the legend in another &quot;corner&quot; of the plot.</p>
+			<div class="listing"><pre><ol><li>...</li>
+<li><span class="src-var">$Legend</span><span class="src-sym">-&gt;</span><span class="src-id">setAlignment</span><span class="src-sym">(</span><span class="src-id">ALIGN_BOTTOM </span>+ <span class="src-id">ALIGN_LEFT</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>...</li>
+</ol></pre></div>
+			<p>This will make it appear in the bottom-left corner of the plot. Use ALIGN_BOTTOM, ALIGN_TOP, ALIGN_LEFT and ALIGN_RIGHT
+				for corner positions.</p><hr />	
+		<a name="intro.legend2"></a><h3 class="title">Layouted Legends</h3><p>The 2nd way is (slightly) more complex, but will allow you to,display legends &quot;outside&quot; the plot, thereby not overlapping.
+				This is done in the same using layouts (<a href="../graphpite/tutorial_graphpite.howto.layout.pkg.html">Plot Layout</a>).</p>
+			<div class="listing"><pre><ol><li>...</li>
+<li><span class="src-var">$Graph</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span></li>
+<li>    <span class="src-key">new </span><span class="src-id">VerticalLayout</span><span class="src-sym">(</span></li>
+<li>        <span class="src-var">$PlotArea </span>= <span class="src-key">new </span><span class="src-id">PlotArea</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,</span></li>
+<li>        <span class="src-var">$Legend </span>= <span class="src-key">new </span><span class="src-id">Legend</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,</span></li>
+<li>        <span class="src-num">95</span></li>
+<li>    <span class="src-sym">)</span></li>
+<li><span class="src-sym">)</span><span class="src-sym">; </span></li>
+<li><span class="src-var">$Legend</span><span class="src-sym">-&gt;</span><span class="src-id">setPlotArea</span><span class="src-sym">(</span><span class="src-var">$PlotArea</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>...</li>
+</ol></pre></div>
+			<p>Note that you have to link the Legend to the PlotArea explicitly. In the 1st option, this is done
+				implicitly, since you add the legend to the plotarea. Using this method you add the legend to a (in this case) 
+				VerticalLayout which is added to a GraPHP, leaving the legend with &quot;no idea&quot; of what plot to show
+				legend for. So you need to have the $Legend-&gt;setPlotArea($PlotArea); for things to work..</p>
+			<p>This will also give the possibility to place the legend wherever you want, fx:</p>
+			<div class="listing"><pre><ol><li>...</li>
+<li><span class="src-var">$Graph</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span></li>
+<li>    <span class="src-key">new </span><span class="src-id">VerticalLayout</span><span class="src-sym">(</span></li>
+<li>        <span class="src-var">$PlotArea </span>= <span class="src-key">new </span><span class="src-id">PlotArea</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,</span></li>
+<li>        <span class="src-key">new </span><span class="src-id">HorizontalLayout</span><span class="src-sym">(</span></li>
+<li>            <span class="src-key">new </span><span class="src-id">PlotArea</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,</span></li>
+<li>            <span class="src-key">new </span><span class="src-id">VerticalLayout</span><span class="src-sym">(</span></li>
+<li>                <span class="src-key">new </span><span class="src-id">PlotArea</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,</span></li>
+<li>                <span class="src-var">$Legend </span>= <span class="src-key">new </span><span class="src-id">Legend</span><span class="src-sym">(</span><span class="src-sym">)</span></li>
+<li>            <span class="src-sym">)</span></li>
+<li>        <span class="src-sym">)</span></li>
+<li>    <span class="src-sym">)            </span></li>
+<li><span class="src-sym">)</span><span class="src-sym">; </span></li>
+<li><span class="src-var">$Legend</span><span class="src-sym">-&gt;</span><span class="src-id">setPlotArea</span><span class="src-sym">(</span><span class="src-var">$PlotArea</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li>...</li>
+</ol></pre></div>
+			<p>Which will cause the Legend to be displayed in the lower-right eigth' of the graph, where the linked PlotArea is displayed in the upper half</p><hr /></span></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="33%" align="left" valign="top"><a href="../graphpite/tutorial_graphpite.howto.layout.pkg.html">Prev</a></td>
+<td width="34%" align="center" valign="top"><a href=
+"../graphpite/tutorial_graphpite.howto.pkg.html">Up</a></td>
+<td width="33%" align="right" valign="top"><a href=
+"../graphpite/tutorial_graphpite.howto.example.pkg.html">Next</a></td>
+</tr>
+
+<tr>
+<td width="33%" align="left" valign="top">Plot Layout</td>
+<td width="34%" align="center" valign="top">How to use GraPHPite</td>
+<td width="33%" align="right" valign="top">Graph example</td>
+</tr>
+</table>
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Fri, 12 Nov 2004 08:24:36 +0100 by <a href="http://www.phpdoc.org">phpDocumentor 1.3.0RC3</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
